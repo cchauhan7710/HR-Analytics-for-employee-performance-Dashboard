@@ -20,15 +20,11 @@ export async function register({ name, email, role, password }) {
 }
 
 export async function login({ email, password }) {
-  try {
-    const response = await api.post("/login", {
-      email,
-      password,
-    });
-    return response.data;
-  } catch (error) {
-    console.log(error.message);
-  }
+  const response = await api.post("/login", {
+    email,
+    password,
+  });
+  return response.data;
 }
 
 export async function logout() {

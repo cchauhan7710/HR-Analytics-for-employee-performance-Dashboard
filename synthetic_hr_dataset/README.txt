@@ -1,10 +1,10 @@
 Synthetic HR Analytics Dataset
 
 Contents
-- employees.csv: 300 employees
-- performance_reviews.csv: 1,800 reviews (six half-yearly periods per employee, 2023-H1 through 2025-H2)
-- attendance_monthly.csv: 3,600 monthly attendance records (calendar year 2025)
-- tasks.csv: 3,000 tasks (10 per employee)
+- employees.csv: 1,000 employees
+- performance_reviews.csv: 6,000 reviews (six half-yearly periods per employee, 2023-H1 through 2025-H2)
+- attendance_monthly.csv: 12,000 monthly attendance records (12 months per employee in calendar year 2025)
+- tasks.csv: 10,000 tasks (10 per employee)
 
 All records are fictional and generated for software development and demonstration. Employee IDs are the join key across files. No real names or personal information are included. Performance scores and operational records are simulated; do not use them to make real employment decisions.
 

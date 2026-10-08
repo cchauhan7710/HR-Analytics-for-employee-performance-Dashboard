@@ -9,18 +9,22 @@ import { useAuth } from '../Hook/useAuth.js'
 const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [error, setError] = useState("")
 
   const navigate = useNavigate()
   const { loading, handleLogin } = useAuth()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await handleLogin({ email, password })
-    navigate("/")
-  }
-
-  if (loading) {
-    return <main><h1>Loading....</h1></main>
+    setError("")
+    try {
+      const success = await handleLogin({ email, password })
+      if (success) {
+        navigate("/")
+      }
+    } catch (error) {
+      setError(error.response?.data?.message || "Unable to log in. Please try again.")
+    }
   }
 
   return (
@@ -36,7 +40,13 @@ const Login = () => {
       </p>
     </div>
 
-    <form onSubmit = {handleSubmit} className="space-y-5">
+    {error && (
+      <div role="alert" className="mb-4 px-4 py-2.5 bg-red-50 border border-red-300 text-red-700 text-sm rounded-md">
+        {error}
+      </div>
+    )}
+
+    <form onSubmit={handleSubmit} className="space-y-5">
 
       <div>
         <label
@@ -51,7 +61,9 @@ const Login = () => {
           id="email"
           name="email"
           placeholder="Enter your email"
-          onChange={(e)=>{setEmail(e.target.value)}}
+          autoComplete="username"
+          required
+          onChange={(e) => setEmail(e.target.value)}
           className="w-full px-4 py-2.5 border border-gray-300 rounded-md outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
         />
       </div>
@@ -69,16 +81,19 @@ const Login = () => {
           id="password"
           name="password"
           placeholder="Enter your password"
-          onChange={(e)=>{setPassword(e.target.value)}}
+          autoComplete="current-password"
+          required
+          onChange={(e) => setPassword(e.target.value)}
           className="w-full px-4 py-2.5 border border-gray-300 rounded-md outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
         />
       </div>
 
       <button
         type="submit"
-        className="w-full bg-blue-600 text-white py-2.5 rounded-md font-medium hover:bg-blue-700 transition"
+        disabled={loading}
+        className="w-full bg-blue-600 text-white py-2.5 rounded-md font-medium hover:bg-blue-700 transition disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        Login
+        {loading ? "Logging in..." : "Login"}
       </button>
 
     </form>
