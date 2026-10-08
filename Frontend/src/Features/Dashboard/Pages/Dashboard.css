@@ -1,0 +1,349 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   HR Analytics Dashboard – Dashboard.css
+   Design tokens derived from the reference image (blue-cyan gradient bg,
+   white card tiles, Inter font, blue/green/orange accent palette)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+/* ── Root Variables ────────────────────────────────────────────────────── */
+:root {
+  --font: "Inter", sans-serif;
+
+  /* Background gradient – soft blue-cyan as in the reference */
+  --bg-from: #dbeafe;   /* blue-100 */
+  --bg-mid:  #e0f2fe;   /* sky-100 */
+  --bg-to:   #f0fdf4;   /* green-50  */
+
+  /* Cards */
+  --card-bg: rgba(255, 255, 255, 0.88);
+  --card-border: rgba(203, 213, 225, 0.6);
+  --card-shadow: 0 2px 12px rgba(99, 102, 241, 0.08);
+  --card-radius: 12px;
+
+  /* Typography */
+  --text-primary: #1e293b;   /* slate-800 */
+  --text-secondary: #475569; /* slate-600 */
+  --text-muted: #94a3b8;     /* slate-400 */
+
+  /* Accent (matching the blue used throughout) */
+  --accent: #3b82f6;         /* blue-500  */
+  --accent-dark: #1d4ed8;    /* blue-700  */
+  --accent-light: #eff6ff;   /* blue-50   */
+
+  /* Tab active */
+  --tab-active-bg: #3b82f6;
+  --tab-active-text: #ffffff;
+  --tab-idle-bg: rgba(255,255,255,0.55);
+  --tab-idle-text: #334155;
+  --tab-idle-border: rgba(148,163,184,0.5);
+
+  /* KPI card */
+  --kpi-bg: rgba(255,255,255,0.92);
+  --kpi-value-color: #1e3a8a; /* blue-900 */
+  --kpi-label-color: #475569;
+
+  /* Chart title */
+  --chart-title-color: #2563eb; /* blue-600 */
+
+  /* Table */
+  --table-header-bg: transparent;
+  --table-total-bg: #eff6ff;
+  --table-border: #e2e8f0;
+  --table-total-color: #1d4ed8;
+}
+
+/* ── Base Reset ────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Dashboard Root ────────────────────────────────────────────────────── */
+.dashboard-root {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--bg-from) 0%, var(--bg-mid) 50%, var(--bg-to) 100%);
+  font-family: var(--font);
+  color: var(--text-primary);
+  padding: 18px 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HEADER
+   ═══════════════════════════════════════════════════════════════════════════ */
+.dash-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Title */
+.dash-title-block {
+  flex-shrink: 0;
+}
+
+.dash-title {
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* Divider between title and tabs */
+.dash-header::after {
+  display: none; /* using gap + border instead */
+}
+
+/* ── Department Tabs ───────────────────────────────────────────────────── */
+.dept-tabs {
+  display: flex;
+  gap: 4px;
+  background: rgba(255,255,255,0.45);
+  border: 1px solid var(--tab-idle-border);
+  border-radius: 8px;
+  padding: 4px;
+  margin-left: 10px;
+}
+
+.dept-tab {
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--tab-idle-text);
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+
+.dept-tab:hover {
+  background: rgba(255,255,255,0.8);
+  color: var(--accent);
+}
+
+.dept-tab--active {
+  background: var(--tab-active-bg) !important;
+  color: var(--tab-active-text) !important;
+  box-shadow: 0 2px 8px rgba(59,130,246,0.35);
+}
+
+/* ── Gender Box ────────────────────────────────────────────────────────── */
+.gender-box {
+  margin-left: auto;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  padding: 10px 14px;
+  min-width: 130px;
+  box-shadow: var(--card-shadow);
+}
+
+.gender-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--chart-title-color);
+  text-align: center;
+  margin-bottom: 6px;
+  letter-spacing: 0.2px;
+}
+
+.gender-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 3px 0;
+}
+
+.gender-swatch {
+  width: 28px;
+  height: 16px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.gender-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+  flex: 1;
+}
+
+.gender-count {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   KPI STRIP
+   ═══════════════════════════════════════════════════════════════════════════ */
+.kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 1100px) {
+  .kpi-strip { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 640px) {
+  .kpi-strip { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* KPI Card */
+.kpi-card {
+  background: var(--kpi-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  padding: 14px 16px;
+  text-align: center;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99,102,241,0.14);
+}
+
+.kpi-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--kpi-label-color);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 6px;
+}
+
+.kpi-value {
+  font-size: clamp(1.4rem, 2vw, 1.9rem);
+  font-weight: 800;
+  color: var(--kpi-value-color);
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CHARTS GRID  (3 columns × 2 rows)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.1fr;
+  gap: 14px;
+}
+
+@media (max-width: 1100px) {
+  .charts-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 700px) {
+  .charts-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Shared Chart Card ─────────────────────────────────────────────────── */
+.chart-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  padding: 16px 14px 10px;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(99,102,241,0.12);
+}
+
+.chart-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--chart-title-color);
+  text-align: center;
+  margin-bottom: 4px;
+  letter-spacing: 0.1px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   JOB SATISFACTION TABLE
+   ═══════════════════════════════════════════════════════════════════════════ */
+.js-table-wrapper {
+  overflow-x: auto;
+  flex: 1;
+  margin-top: 6px;
+}
+
+.js-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+  font-family: var(--font);
+}
+
+.js-th {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--chart-title-color);
+  border-bottom: 2px solid var(--table-border);
+  padding: 5px 6px;
+  text-align: center;
+  white-space: nowrap;
+  background: transparent;
+}
+
+.js-th.js-role-col {
+  text-align: left;
+}
+
+.js-th.js-total-header {
+  color: var(--chart-title-color);
+}
+
+.js-td {
+  padding: 4px 6px;
+  border-bottom: 1px solid #f1f5f9;
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+
+.js-num-td {
+  text-align: center;
+}
+
+.js-role-td {
+  text-align: left;
+  white-space: nowrap;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.js-data-row:hover td {
+  background: #f8fafc;
+}
+
+/* Total row */
+.js-total-row td {
+  background: var(--table-total-bg);
+  font-weight: 700;
+  color: var(--table-total-color) !important;
+  border-top: 2px solid #bfdbfe;
+  border-bottom: none;
+}
+
+.js-total-cell {
+  font-weight: 800 !important;
+  color: var(--table-total-color) !important;
+}

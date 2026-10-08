@@ -1,0 +1,301 @@
+﻿employee_id,department,job_title,date_joined,employment_status
+EMP001,Sales,Sales Analyst,2023-07-19,Active
+EMP002,IT,QA Analyst,2021-06-29,Active
+EMP003,Marketing,Marketing Analyst,2024-08-17,Active
+EMP004,IT,Software Developer,2023-09-11,Active
+EMP005,Finance,Financial Analyst,2025-05-09,Active
+EMP006,Marketing,Marketing Analyst,2024-03-27,Active
+EMP007,Sales,Sales Executive,2019-04-20,Active
+EMP008,Sales,Sales Executive,2019-12-13,Active
+EMP009,Operations,Coordinator,2024-12-22,Active
+EMP010,Finance,Financial Analyst,2023-03-19,Active
+EMP011,Marketing,Content Specialist,2019-09-22,Active
+EMP012,Finance,Finance Executive,2021-09-22,Active
+EMP013,Operations,Coordinator,2022-02-14,Active
+EMP014,Operations,Operations Executive,2025-02-09,Active
+EMP015,HR,HR Analyst,2025-12-09,Active
+EMP016,IT,IT Support Analyst,2020-11-04,Active
+EMP017,Marketing,Content Specialist,2025-03-24,Active
+EMP018,Operations,Operations Executive,2022-02-08,Active
+EMP019,IT,Software Developer,2021-01-08,Active
+EMP020,Sales,Account Manager,2019-06-14,Active
+EMP021,IT,QA Analyst,2025-06-05,Active
+EMP022,Marketing,Marketing Analyst,2021-12-23,Active
+EMP023,Finance,Accountant,2024-12-08,Active
+EMP024,IT,IT Support Analyst,2021-02-21,Active
+EMP025,IT,IT Support Analyst,2021-12-18,Active
+EMP026,HR,HR Executive,2019-10-01,Active
+EMP027,Marketing,Content Specialist,2025-12-04,Active
+EMP028,Sales,Account Manager,2024-03-03,Active
+EMP029,Marketing,Marketing Analyst,2024-05-13,Active
+EMP030,Finance,Accountant,2025-03-07,Active
+EMP031,Marketing,Marketing Executive,2020-01-06,Active
+EMP032,Marketing,Content Specialist,2020-11-13,Active
+EMP033,Sales,Sales Analyst,2023-08-17,Active
+EMP034,Finance,Accountant,2019-07-01,Active
+EMP035,Finance,Accountant,2025-10-17,Active
+EMP036,Marketing,Marketing Executive,2019-02-23,Active
+EMP037,IT,QA Analyst,2021-05-30,Active
+EMP038,Finance,Accountant,2019-12-08,Active
+EMP039,Sales,Sales Analyst,2023-03-25,Active
+EMP040,Sales,Account Manager,2020-06-28,Active
+EMP041,Marketing,Marketing Analyst,2025-07-05,Active
+EMP042,Finance,Financial Analyst,2025-08-25,Active
+EMP043,Marketing,Content Specialist,2023-02-21,Active
+EMP044,Finance,Accountant,2020-04-12,Active
+EMP045,Finance,Financial Analyst,2024-04-11,Active
+EMP046,Operations,Coordinator,2020-11-29,Active
+EMP047,Operations,Operations Analyst,2025-12-12,Active
+EMP048,HR,HR Executive,2023-06-12,Active
+EMP049,Finance,Accountant,2020-05-10,Active
+EMP050,Operations,Operations Executive,2025-08-02,Active
+EMP051,Sales,Sales Analyst,2024-06-15,Active
+EMP052,HR,HR Analyst,2023-01-28,Active
+EMP053,Finance,Financial Analyst,2023-05-29,Active
+EMP054,Finance,Finance Executive,2024-06-27,Active
+EMP055,HR,HR Executive,2022-10-02,Active
+EMP056,Finance,Financial Analyst,2022-12-03,Active
+EMP057,Finance,Finance Executive,2024-09-20,Active
+EMP058,Finance,Financial Analyst,2021-05-19,Active
+EMP059,Finance,Accountant,2024-12-11,Active
+EMP060,HR,Recruiter,2023-11-26,Active
+EMP061,Operations,Operations Executive,2022-09-20,Active
+EMP062,Sales,Sales Analyst,2023-10-29,Active
+EMP063,IT,QA Analyst,2025-07-10,Active
+EMP064,Operations,Operations Analyst,2025-06-01,Active
+EMP065,HR,HR Executive,2021-01-22,Active
+EMP066,Sales,Sales Analyst,2025-07-14,Active
+EMP067,Operations,Operations Analyst,2024-12-10,Active
+EMP068,Finance,Accountant,2024-02-24,Active
+EMP069,Operations,Operations Analyst,2020-12-16,Active
+EMP070,IT,QA Analyst,2020-08-22,Active
+EMP071,Finance,Accountant,2019-09-30,Active
+EMP072,Finance,Accountant,2024-06-03,Active
+EMP073,Marketing,Content Specialist,2020-10-22,Active
+EMP074,Operations,Operations Executive,2024-01-22,Active
+EMP075,Operations,Operations Analyst,2019-11-08,Active
+EMP076,Sales,Sales Analyst,2023-08-24,Active
+EMP077,Sales,Sales Analyst,2019-09-10,Active
+EMP078,Marketing,Marketing Executive,2023-05-02,Active
+EMP079,HR,HR Executive,2025-07-01,Active
+EMP080,Finance,Finance Executive,2024-05-07,Active
+EMP081,Operations,Coordinator,2023-08-30,Active
+EMP082,Operations,Operations Executive,2024-10-27,Active
+EMP083,Marketing,Marketing Analyst,2026-01-02,Active
+EMP084,Finance,Financial Analyst,2020-07-01,Active
+EMP085,HR,Recruiter,2024-09-03,Active
+EMP086,Operations,Operations Analyst,2023-06-16,Active
+EMP087,IT,QA Analyst,2025-12-06,Active
+EMP088,Marketing,Marketing Executive,2020-08-21,Active
+EMP089,Finance,Finance Executive,2024-08-24,Active
+EMP090,Marketing,Content Specialist,2023-09-11,Active
+EMP091,HR,HR Executive,2022-11-02,Active
+EMP092,Sales,Sales Executive,2023-09-29,Active
+EMP093,Marketing,Marketing Analyst,2021-01-09,Active
+EMP094,Sales,Account Manager,2021-03-12,Active
+EMP095,HR,HR Analyst,2024-07-16,Active
+EMP096,Sales,Sales Analyst,2021-05-23,Active
+EMP097,Operations,Coordinator,2020-01-24,Active
+EMP098,Finance,Financial Analyst,2020-02-26,Active
+EMP099,Sales,Account Manager,2025-01-23,Active
+EMP100,Finance,Accountant,2022-11-29,Active
+EMP101,IT,QA Analyst,2024-10-19,Active
+EMP102,Sales,Account Manager,2024-09-08,Active
+EMP103,Operations,Operations Analyst,2020-04-04,Active
+EMP104,IT,Software Developer,2025-05-03,Active
+EMP105,Operations,Operations Analyst,2020-11-22,Active
+EMP106,HR,HR Executive,2020-08-14,Active
+EMP107,Finance,Finance Executive,2023-07-30,Active
+EMP108,Operations,Coordinator,2021-07-25,Active
+EMP109,Sales,Sales Analyst,2021-02-22,Active
+EMP110,IT,Software Developer,2019-08-19,Active
+EMP111,IT,Software Developer,2020-05-07,Active
+EMP112,Marketing,Content Specialist,2022-06-23,Active
+EMP113,Marketing,Content Specialist,2025-08-23,Active
+EMP114,HR,HR Analyst,2021-11-15,Active
+EMP115,Sales,Sales Executive,2024-09-27,Active
+EMP116,Operations,Operations Executive,2025-08-17,Active
+EMP117,Marketing,Content Specialist,2020-11-29,Active
+EMP118,HR,HR Executive,2021-09-06,Active
+EMP119,Sales,Account Manager,2024-06-06,Active
+EMP120,Marketing,Marketing Analyst,2020-03-18,Active
+EMP121,Operations,Operations Executive,2023-12-24,Active
+EMP122,Finance,Financial Analyst,2025-10-21,Active
+EMP123,Operations,Operations Executive,2019-09-04,Active
+EMP124,Operations,Coordinator,2021-03-13,Active
+EMP125,IT,QA Analyst,2020-12-07,Active
+EMP126,IT,Software Developer,2026-01-22,Active
+EMP127,Operations,Coordinator,2025-09-26,Active
+EMP128,Operations,Operations Analyst,2022-04-04,Active
+EMP129,Finance,Accountant,2021-03-12,Active
+EMP130,Operations,Operations Executive,2022-03-15,Active
+EMP131,Marketing,Marketing Analyst,2019-01-30,Active
+EMP132,HR,Recruiter,2025-09-16,Active
+EMP133,Sales,Sales Analyst,2022-05-02,Active
+EMP134,Operations,Operations Executive,2025-02-01,Active
+EMP135,IT,QA Analyst,2024-08-04,Active
+EMP136,Finance,Financial Analyst,2020-12-13,Active
+EMP137,Sales,Sales Analyst,2021-03-15,Active
+EMP138,Finance,Financial Analyst,2025-09-28,Active
+EMP139,Finance,Finance Executive,2021-11-11,Active
+EMP140,Finance,Accountant,2022-06-16,Active
+EMP141,Sales,Sales Executive,2025-05-29,Active
+EMP142,Finance,Finance Executive,2025-06-14,Active
+EMP143,IT,QA Analyst,2019-07-07,Active
+EMP144,Operations,Operations Analyst,2025-02-15,Active
+EMP145,IT,Software Developer,2024-01-31,Active
+EMP146,HR,HR Analyst,2025-12-18,Active
+EMP147,Operations,Operations Executive,2024-04-18,Active
+EMP148,Operations,Operations Executive,2019-07-25,Active
+EMP149,HR,HR Analyst,2020-07-11,Active
+EMP150,Sales,Sales Analyst,2026-01-16,Active
+EMP151,Marketing,Marketing Executive,2025-03-01,Active
+EMP152,Finance,Financial Analyst,2024-07-17,Active
+EMP153,Finance,Financial Analyst,2019-04-28,Active
+EMP154,IT,QA Analyst,2024-02-29,Active
+EMP155,Operations,Operations Analyst,2020-07-21,Active
+EMP156,Sales,Sales Analyst,2021-11-03,Active
+EMP157,HR,HR Executive,2026-02-07,Active
+EMP158,HR,Recruiter,2020-05-03,Active
+EMP159,Marketing,Content Specialist,2023-06-04,Active
+EMP160,IT,IT Support Analyst,2025-12-24,Active
+EMP161,Marketing,Marketing Analyst,2020-03-16,Active
+EMP162,IT,QA Analyst,2019-09-14,Active
+EMP163,Finance,Finance Executive,2024-08-04,Active
+EMP164,HR,HR Executive,2021-10-27,Active
+EMP165,IT,Software Developer,2025-09-12,Active
+EMP166,Operations,Operations Analyst,2024-12-23,Active
+EMP167,Finance,Accountant,2025-12-24,Active
+EMP168,Operations,Coordinator,2020-01-19,Active
+EMP169,IT,IT Support Analyst,2023-12-08,Active
+EMP170,Operations,Operations Analyst,2021-07-04,Active
+EMP171,Marketing,Marketing Analyst,2020-07-07,Active
+EMP172,HR,HR Executive,2022-07-20,Active
+EMP173,Operations,Coordinator,2023-10-11,Active
+EMP174,IT,Software Developer,2020-03-13,Active
+EMP175,Operations,Operations Executive,2024-10-24,Active
+EMP176,Sales,Sales Executive,2020-01-31,Active
+EMP177,IT,IT Support Analyst,2022-10-28,Active
+EMP178,Marketing,Marketing Analyst,2020-09-05,Active
+EMP179,HR,Recruiter,2019-05-21,Active
+EMP180,IT,QA Analyst,2022-02-10,Active
+EMP181,Operations,Operations Analyst,2021-11-26,Active
+EMP182,Sales,Sales Analyst,2026-01-04,Active
+EMP183,Operations,Operations Executive,2024-01-12,Active
+EMP184,HR,HR Executive,2023-11-21,Active
+EMP185,IT,QA Analyst,2020-11-26,Active
+EMP186,Sales,Sales Analyst,2019-01-29,Active
+EMP187,IT,QA Analyst,2022-03-17,Active
+EMP188,Finance,Accountant,2022-07-15,Active
+EMP189,IT,QA Analyst,2023-08-30,Active
+EMP190,Operations,Coordinator,2024-07-01,Active
+EMP191,Sales,Sales Analyst,2023-12-24,Active
+EMP192,Sales,Account Manager,2021-07-15,Active
+EMP193,Operations,Operations Analyst,2024-02-05,Active
+EMP194,IT,Software Developer,2019-11-15,Active
+EMP195,Marketing,Marketing Executive,2025-11-29,Active
+EMP196,Marketing,Marketing Executive,2021-06-04,Active
+EMP197,HR,HR Analyst,2023-09-13,Active
+EMP198,Sales,Sales Executive,2025-12-25,Active
+EMP199,Operations,Coordinator,2020-10-29,Active
+EMP200,IT,IT Support Analyst,2024-11-01,Active
+EMP201,HR,HR Analyst,2023-10-06,Active
+EMP202,Operations,Coordinator,2025-09-28,Active
+EMP203,Marketing,Marketing Analyst,2025-07-30,Active
+EMP204,HR,Recruiter,2025-12-25,Active
+EMP205,Marketing,Marketing Analyst,2021-10-18,Active
+EMP206,Sales,Sales Executive,2019-10-20,Active
+EMP207,IT,QA Analyst,2020-07-19,Active
+EMP208,HR,HR Executive,2019-07-24,Active
+EMP209,Marketing,Content Specialist,2025-10-04,Active
+EMP210,Operations,Operations Analyst,2022-06-03,Active
+EMP211,IT,IT Support Analyst,2020-09-08,Active
+EMP212,Sales,Sales Executive,2022-03-16,Active
+EMP213,IT,Software Developer,2023-09-14,Active
+EMP214,Marketing,Marketing Executive,2022-08-20,Active
+EMP215,Finance,Accountant,2021-05-11,Active
+EMP216,IT,IT Support Analyst,2023-07-14,Active
+EMP217,Marketing,Marketing Analyst,2019-02-04,Active
+EMP218,Sales,Sales Analyst,2021-05-29,Active
+EMP219,Marketing,Marketing Executive,2019-07-29,Active
+EMP220,HR,Recruiter,2021-01-01,Active
+EMP221,Marketing,Content Specialist,2022-01-06,Active
+EMP222,HR,HR Executive,2024-08-14,Active
+EMP223,Sales,Account Manager,2021-09-28,Active
+EMP224,Marketing,Marketing Executive,2025-08-02,Active
+EMP225,IT,IT Support Analyst,2020-10-21,Active
+EMP226,Operations,Operations Executive,2024-08-26,Active
+EMP227,Marketing,Marketing Executive,2023-09-27,Active
+EMP228,HR,HR Analyst,2025-04-18,Active
+EMP229,Operations,Coordinator,2022-04-29,Active
+EMP230,Operations,Operations Executive,2022-03-08,Active
+EMP231,IT,IT Support Analyst,2024-06-04,Active
+EMP232,Sales,Sales Executive,2021-06-11,Active
+EMP233,Sales,Sales Executive,2024-08-18,Active
+EMP234,IT,IT Support Analyst,2019-07-01,Active
+EMP235,Finance,Finance Executive,2020-04-21,Active
+EMP236,Operations,Operations Executive,2023-05-05,Active
+EMP237,IT,IT Support Analyst,2024-03-01,Active
+EMP238,HR,HR Executive,2021-07-05,Active
+EMP239,Operations,Coordinator,2025-04-27,Active
+EMP240,HR,HR Executive,2020-04-25,Active
+EMP241,IT,Software Developer,2024-01-02,Active
+EMP242,Sales,Account Manager,2022-05-01,Active
+EMP243,Sales,Sales Executive,2019-10-09,Active
+EMP244,HR,HR Executive,2025-11-09,Active
+EMP245,Operations,Operations Analyst,2019-01-16,Active
+EMP246,Operations,Coordinator,2019-10-06,Active
+EMP247,Operations,Operations Analyst,2025-02-22,Active
+EMP248,Operations,Operations Analyst,2021-09-14,Active
+EMP249,IT,IT Support Analyst,2025-07-20,Active
+EMP250,Operations,Coordinator,2024-08-25,Active
+EMP251,Sales,Account Manager,2024-10-31,Active
+EMP252,Finance,Finance Executive,2019-06-09,Active
+EMP253,HR,Recruiter,2022-01-03,Active
+EMP254,Marketing,Content Specialist,2019-09-26,Active
+EMP255,Finance,Accountant,2023-03-24,Active
+EMP256,Sales,Sales Executive,2020-06-11,Active
+EMP257,IT,IT Support Analyst,2020-08-13,Active
+EMP258,Marketing,Content Specialist,2024-02-19,Active
+EMP259,Operations,Operations Executive,2023-09-22,Active
+EMP260,Sales,Sales Executive,2025-11-17,Active
+EMP261,Finance,Accountant,2025-12-01,Active
+EMP262,IT,Software Developer,2020-03-04,Active
+EMP263,IT,QA Analyst,2024-02-06,Active
+EMP264,Operations,Operations Analyst,2024-02-17,Active
+EMP265,HR,Recruiter,2022-12-13,Active
+EMP266,Sales,Sales Executive,2024-09-14,Active
+EMP267,Operations,Operations Executive,2023-06-25,Active
+EMP268,Marketing,Content Specialist,2022-01-21,Active
+EMP269,Finance,Accountant,2019-05-15,Active
+EMP270,Marketing,Marketing Executive,2024-05-13,Active
+EMP271,Sales,Sales Executive,2021-12-25,Active
+EMP272,Sales,Account Manager,2019-07-09,Active
+EMP273,Finance,Accountant,2025-12-11,Active
+EMP274,Marketing,Marketing Analyst,2019-11-25,Active
+EMP275,Marketing,Marketing Executive,2021-05-17,Active
+EMP276,IT,Software Developer,2019-07-17,Active
+EMP277,Finance,Finance Executive,2019-09-21,Active
+EMP278,Marketing,Marketing Executive,2019-07-13,Active
+EMP279,Sales,Sales Analyst,2023-10-06,Active
+EMP280,IT,Software Developer,2021-06-01,Active
+EMP281,HR,Recruiter,2020-08-06,Active
+EMP282,HR,Recruiter,2024-09-18,Active
+EMP283,Operations,Coordinator,2022-02-14,Active
+EMP284,IT,QA Analyst,2024-07-11,Active
+EMP285,Marketing,Marketing Analyst,2022-11-05,Active
+EMP286,Operations,Operations Analyst,2024-09-05,Active
+EMP287,Marketing,Content Specialist,2024-09-27,Active
+EMP288,Marketing,Marketing Analyst,2020-10-10,Active
+EMP289,IT,Software Developer,2022-11-22,Active
+EMP290,Operations,Operations Analyst,2022-10-31,Active
+EMP291,Operations,Operations Executive,2025-06-11,Active
+EMP292,IT,Software Developer,2024-05-19,Active
+EMP293,Finance,Accountant,2021-12-09,Active
+EMP294,Operations,Coordinator,2020-07-18,Active
+EMP295,Marketing,Marketing Executive,2025-11-30,Active
+EMP296,Sales,Sales Executive,2024-02-29,Active
+EMP297,Finance,Finance Executive,2019-02-15,Active
+EMP298,Operations,Operations Analyst,2025-04-09,Active
+EMP299,Marketing,Marketing Executive,2024-12-05,Active
+EMP300,Operations,Operations Executive,2022-09-22,Active
