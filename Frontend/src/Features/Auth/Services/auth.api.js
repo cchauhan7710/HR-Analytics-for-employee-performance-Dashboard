@@ -1,10 +1,18 @@
 import axios from "axios";
 
-const AUTH_BASE_URL =
+const rawAuthBase =
   import.meta.env.VITE_AUTH_BASE_URL ||
-  (import.meta.env.VITE_API_BASE_URL
-    ? `${import.meta.env.VITE_API_BASE_URL}/auth`
-    : (import.meta.env.DEV ? "http://localhost:5000/api/auth" : "/api/auth"));
+  import.meta.env.VITE_API_BASE_URL ||
+  import.meta.env.VITE_BACKEND_URL ||
+  import.meta.env.VITE_SERVER_URL ||
+  (import.meta.env.DEV ? "http://localhost:5000/api/auth" : "/api/auth");
+
+const cleanBase = rawAuthBase.replace(/\/+$/, "");
+const AUTH_BASE_URL = cleanBase.endsWith("/auth")
+  ? cleanBase
+  : cleanBase.endsWith("/api")
+  ? `${cleanBase}/auth`
+  : `${cleanBase}/api/auth`;
 
 const api = axios.create({
   baseURL: AUTH_BASE_URL,
