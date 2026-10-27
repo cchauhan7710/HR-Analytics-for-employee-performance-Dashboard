@@ -47,16 +47,23 @@ export default function MetricDefinitions({ isDark = true }) {
       note: "Measures delivery reliability and operational adherence.",
       accent: "border-sky-200/80 bg-sky-50/50 text-sky-700 dark:border-sky-800/80 dark:bg-sky-950/50 dark:text-sky-300",
     },
+    {
+      name: "Turnover Rate (Attrition %)",
+      unit: "Percentage (%)",
+      formula: "(Total Exited / Total Workforce) × 100",
+      note: "Industry benchmark is typically < 12-15% annually. Lower turnover indicates higher workforce stability and retention.",
+      accent: "border-rose-200/80 bg-rose-50/50 text-rose-700 dark:border-rose-800/80 dark:bg-rose-950/50 dark:text-rose-300",
+    },
   ];
 
   return (
-    <div className="rounded-2xl border backdrop-blur-xl overflow-hidden mb-6 transition-all duration-300 bg-white/95 border-slate-200/90 dark:bg-slate-900/75 dark:border-slate-800/90 shadow-xs">
+    <div className="rounded-2xl border overflow-hidden mb-6 transition-all duration-300 card-specular shadow-sm">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex items-center justify-between px-5 sm:px-6 py-4 text-left font-semibold transition-colors hover:bg-slate-50/70 dark:hover:bg-slate-800/50 cursor-pointer"
       >
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 border border-blue-100 dark:bg-blue-500/15 dark:text-blue-400 dark:border-blue-500/30 shadow-2xs">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-500/10 text-blue-500 border border-blue-500/20 shadow-xs">
             <BookOpen className="w-4 h-4" />
           </div>
           <div>

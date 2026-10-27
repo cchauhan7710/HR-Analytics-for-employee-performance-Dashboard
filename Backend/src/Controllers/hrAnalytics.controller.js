@@ -741,6 +741,39 @@ export const getOverviewReport = async (req, res) => {
       empParams
     );
 
+    // Compute Turnover / Attrition metrics
+    let exitedEmployees = (empKpi.total_employees || 0) - (empKpi.active_employees || 0);
+    let turnoverRate = 0;
+
+    if (empKpi.total_employees > 0 && exitedEmployees > 0) {
+      turnoverRate = Math.round((exitedEmployees / empKpi.total_employees) * 1000) / 10;
+    } else {
+      // Check legacy employee table where detailed exit/status records exist
+      try {
+        let legacyWhere = "";
+        const legacyParams = [];
+        if (department && department !== "All") {
+          legacyWhere = " WHERE department = ?";
+          legacyParams.push(department);
+        }
+        const [[legacyKpi]] = await pool.query(
+          `SELECT 
+            COUNT(*) AS total,
+            SUM(CASE WHEN current_Status != 'Active' THEN 1 ELSE 0 END) AS exited
+           FROM employee ${legacyWhere}`,
+          legacyParams
+        );
+        if (legacyKpi && legacyKpi.total > 0) {
+          exitedEmployees = Number(legacyKpi.exited) || 0;
+          turnoverRate = Math.round(((legacyKpi.exited || 0) / legacyKpi.total) * 1000) / 10;
+        }
+      } catch (err) {
+        console.warn("Legacy employee table query skipped:", err.message);
+      }
+    }
+
+    const retentionRate = Math.max(0, Math.round((100 - turnoverRate) * 10) / 10);
+
     const [[reviewKpi]] = await pool.query(
       `SELECT 
         ROUND(AVG(rating_out_of_5), 2) AS avg_review_rating,
@@ -814,7 +847,10 @@ export const getOverviewReport = async (req, res) => {
         ROUND(
           (SUM(CASE WHEN t.status = 'Completed' AND t.completed_date <= t.due_date THEN 1 ELSE 0 END) / 
            NULLIF(SUM(CASE WHEN t.status = 'Completed' THEN 1 ELSE 0 END), 0)) * 100, 1
-        ) AS on_time_rate
+        ) AS on_time_rate,
+        ROUND(
+          (SUM(CASE WHEN e.employment_status != 'Active' THEN 1 ELSE 0 END) / COUNT(DISTINCT e.employee_id)) * 100, 1
+        ) AS turnover_rate
        FROM employees e
        LEFT JOIN performance_reviews pr ON e.employee_id = pr.employee_id
        LEFT JOIN attendance_monthly am ON e.employee_id = am.employee_id
@@ -822,6 +858,29 @@ export const getOverviewReport = async (req, res) => {
        GROUP BY e.department
        ORDER BY e.department ASC`
     );
+
+    // Enrich deptBreakdown with turnover from legacy database records if available
+    try {
+      const [legacyDeptTurnover] = await pool.query(`
+        SELECT department,
+          ROUND((SUM(CASE WHEN current_Status != 'Active' THEN 1 ELSE 0 END) / COUNT(*)) * 100, 1) AS legacy_turnover
+        FROM employee
+        GROUP BY department
+      `);
+      const legacyMap = {};
+      legacyDeptTurnover.forEach((r) => {
+        legacyMap[r.department] = parseFloat(r.legacy_turnover) || 0;
+      });
+      deptBreakdown.forEach((dept) => {
+        if (!dept.turnover_rate || dept.turnover_rate === "0.0" || dept.turnover_rate === 0) {
+          dept.turnover_rate = legacyMap[dept.department] !== undefined ? legacyMap[dept.department] : 0;
+        } else {
+          dept.turnover_rate = parseFloat(dept.turnover_rate);
+        }
+      });
+    } catch (legacyErr) {
+      // ignore if employee table not queried
+    }
 
     // 5. Task Status & Priority Distribution
     const [taskStatusDistribution] = await pool.query(
@@ -848,6 +907,9 @@ export const getOverviewReport = async (req, res) => {
       kpis: {
         total_employees: empKpi.total_employees || 0,
         active_employees: empKpi.active_employees || 0,
+        exited_employees: exitedEmployees,
+        turnover_rate: turnoverRate,
+        retention_rate: retentionRate,
         avg_review_rating: reviewKpi.avg_review_rating !== null ? parseFloat(reviewKpi.avg_review_rating) : null,
         avg_goals_completed: reviewKpi.avg_goals_completed !== null ? parseFloat(reviewKpi.avg_goals_completed) : null,
         total_reviews: reviewKpi.total_reviews || 0,

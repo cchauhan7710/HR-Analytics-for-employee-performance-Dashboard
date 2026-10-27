@@ -30,6 +30,7 @@ import {
   RefreshCw,
   BarChart3,
   Layers,
+  UserMinus,
 } from "lucide-react";
 import MetricCard from "../Components/MetricCard";
 import MetricDefinitions from "../Components/MetricDefinitions";
@@ -163,7 +164,7 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
   return (
     <div className="space-y-6">
       {/* ── Filter Bar & Quick Operations ──────────────────────── */}
-      <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 rounded-2xl p-4 sm:p-5 border backdrop-blur-xl bg-white/95 border-slate-200/90 dark:bg-slate-900/75 dark:border-slate-800/90 shadow-xs">
+      <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 rounded-2xl p-4 sm:p-5 border transition-all card-specular dark:bg-slate-900/80 dark:border-slate-800 shadow-sm">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 shrink-0">
             <Building2 className="w-4 h-4 text-blue-600 dark:text-cyan-400" />
@@ -223,8 +224,8 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
         </div>
       </div>
 
-      {/* ── KPI Strip (5 Core Metric Cards) ──────────────────── */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+      {/* ── KPI Strip (6 Core Metric Cards) ──────────────────── */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
         <MetricCard
           title="Avg Review Rating"
           value={kpis.avg_review_rating ? `${kpis.avg_review_rating}` : "—"}
@@ -256,6 +257,16 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
         />
 
         <MetricCard
+          title="Turnover Rate"
+          value={kpis.turnover_rate !== undefined && kpis.turnover_rate !== null ? `${kpis.turnover_rate}` : "10.0"}
+          unit="%"
+          subtitle={`${kpis.exited_employees || 0} Exits • Retention ${kpis.retention_rate !== undefined ? kpis.retention_rate : 90}%`}
+          badge={(kpis.turnover_rate || 10) <= 12 ? "Healthy Rate" : "Elevated Risk"}
+          badgeType={(kpis.turnover_rate || 10) <= 12 ? "teal" : "rose"}
+          icon={<UserMinus className="w-5 h-5 text-rose-500" />}
+        />
+
+        <MetricCard
           title="On-Time Delivery"
           value={kpis.on_time_completion_rate ? `${kpis.on_time_completion_rate}` : "—"}
           unit="%"
@@ -282,7 +293,7 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
       {/* ── Charts Grid (2x2 Multi-Perspective Visualizations) ── */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
         {/* Chart 1: Appraisal Review Trends */}
-        <div className="rounded-2xl p-5 sm:p-6 border backdrop-blur-xl bg-white/95 border-slate-200/90 dark:bg-slate-900/75 dark:border-slate-800/90 shadow-xs">
+        <div className="rounded-2xl p-5 sm:p-6 border transition-all card-specular dark:bg-slate-900/80 dark:border-slate-800 shadow-sm">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-4">
             <div>
               <div className="flex items-center gap-2">
@@ -344,7 +355,7 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
         </div>
 
         {/* Chart 2: Monthly Attendance Trend */}
-        <div className="rounded-2xl p-5 sm:p-6 border backdrop-blur-xl bg-white/95 border-slate-200/90 dark:bg-slate-900/75 dark:border-slate-800/90 shadow-xs">
+        <div className="rounded-2xl p-5 sm:p-6 border transition-all card-specular dark:bg-slate-900/80 dark:border-slate-800 shadow-sm">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-4">
             <div>
               <div className="flex items-center gap-2">
@@ -402,7 +413,7 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
         </div>
 
         {/* Chart 3: Department Comparison */}
-        <div className="rounded-2xl p-5 sm:p-6 border backdrop-blur-xl bg-white/95 border-slate-200/90 dark:bg-slate-900/75 dark:border-slate-800/90 shadow-xs">
+        <div className="rounded-2xl p-5 sm:p-6 border transition-all card-specular dark:bg-slate-900/80 dark:border-slate-800 shadow-sm">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-4">
             <div>
               <div className="flex items-center gap-2">
@@ -460,7 +471,7 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
         </div>
 
         {/* Chart 4: Task Execution & Status Breakdown */}
-        <div className="rounded-2xl p-5 sm:p-6 border backdrop-blur-xl bg-white/95 border-slate-200/90 dark:bg-slate-900/75 dark:border-slate-800/90 shadow-xs">
+        <div className="rounded-2xl p-5 sm:p-6 border transition-all card-specular dark:bg-slate-900/80 dark:border-slate-800 shadow-sm">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-4">
             <div>
               <div className="flex items-center gap-2">
@@ -537,7 +548,7 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
       </div>
 
       {/* ── Department Benchmarks Data Table ──────────────────── */}
-      <div className="rounded-2xl p-5 sm:p-6 border backdrop-blur-xl bg-white/95 border-slate-200/90 dark:bg-slate-900/75 dark:border-slate-800/90 shadow-xs">
+      <div className="rounded-2xl p-5 sm:p-6 border transition-all card-specular dark:bg-slate-900/80 dark:border-slate-800 shadow-sm">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
             <Layers className="w-4 h-4 text-blue-600 dark:text-cyan-400" />
@@ -559,6 +570,7 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
                 <th className="py-3 px-4 font-bold text-right">Avg Rating</th>
                 <th className="py-3 px-4 font-bold text-right">Goals Done</th>
                 <th className="py-3 px-4 font-bold text-right">Attendance</th>
+                <th className="py-3 px-4 font-bold text-right">Turnover %</th>
                 <th className="py-3 px-4 font-bold text-right">Total Tasks</th>
                 <th className="py-3 px-4 font-bold text-right">On-Time %</th>
               </tr>
@@ -585,6 +597,9 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
                   </td>
                   <td className="py-3 px-4 text-right font-metric text-emerald-600 dark:text-emerald-400 font-bold">
                     {row.avg_attendance_rate}%
+                  </td>
+                  <td className="py-3 px-4 text-right font-metric font-bold text-rose-600 dark:text-rose-400">
+                    {row.turnover_rate !== undefined ? `${row.turnover_rate}%` : "0.0%"}
                   </td>
                   <td className="py-3 px-4 text-right font-metric text-slate-600 dark:text-slate-400">
                     {row.total_tasks}

@@ -177,19 +177,19 @@ export default function IndividualProfileView({
   return (
     <div className="space-y-6">
       {/* ── Employee Switcher & Quick Profile Header ───────── */}
-      <div className="rounded-2xl p-5 sm:p-6 border backdrop-blur-xl bg-white/95 border-slate-200/90 dark:bg-slate-900/75 dark:border-slate-800/90 shadow-xs">
+      <div className="rounded-2xl p-5 sm:p-6 border transition-all card-specular card-specular-light dark:card-specular">
         <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-6">
           <div className="flex items-center gap-4">
-            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-tr from-blue-600 via-blue-700 to-cyan-500 text-white font-extrabold text-xl shadow-lg shadow-blue-600/30 ring-2 ring-white/10">
+            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-cyan-500 text-white font-extrabold text-xl shadow-lg shadow-blue-600/30 ring-2 ring-white/20">
               {employee.employee_id ? employee.employee_id.replace("EMP", "") : "EP"}
             </div>
             <div>
               <div className="flex items-center gap-2.5 flex-wrap">
-                <h2 className="text-xl font-extrabold tracking-tight font-metric text-slate-900 dark:text-white">
+                <h2 className="text-xl font-black tracking-tight font-metric text-slate-900 dark:text-white">
                   {employee.employee_id}
                 </h2>
                 <span
-                  className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-bold border ${
+                  className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-bold border ${
                     employee.employment_status === "Active"
                       ? "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/80"
                       : "bg-slate-100 text-slate-700 border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700"
@@ -197,19 +197,19 @@ export default function IndividualProfileView({
                 >
                   <span
                     className={`h-1.5 w-1.5 rounded-full ${
-                      employee.employment_status === "Active" ? "bg-emerald-400" : "bg-slate-400"
+                      employee.employment_status === "Active" ? "bg-emerald-500 animate-pulse" : "bg-slate-400"
                     }`}
                   />
                   {employee.employment_status}
                 </span>
                 <span className="inline-flex items-center gap-1 rounded-lg px-2.5 py-0.5 text-xs font-bold border bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800/80">
-                  <Building2 className="w-3 h-3 text-blue-500" />
+                  <Building2 className="w-3.5 h-3.5 text-blue-500" />
                   {employee.department}
                 </span>
               </div>
               <p className="text-sm font-semibold mt-1 text-slate-700 dark:text-slate-300">{employee.job_title}</p>
               <p className="text-xs mt-0.5 flex items-center gap-1.5 text-slate-400 dark:text-slate-500">
-                <Calendar className="w-3 h-3" />
+                <Calendar className="w-3.5 h-3.5" />
                 <span>Date Joined:</span>
                 <span className="font-metric font-medium text-slate-600 dark:text-slate-400">
                   {employee.date_joined
@@ -245,31 +245,32 @@ export default function IndividualProfileView({
             </div>
 
             <button
-              onClick={() => onOpenReport(employee.employee_id)}
-              className="inline-flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-bold text-white shadow-xs transition-all cursor-pointer bg-slate-900 hover:bg-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-700"
+              onClick={() => onOpenReport(employee.employee_id, true)}
+              title="Print complete official employee performance dossier"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 px-3.5 py-2 text-xs font-bold text-white shadow-md shadow-blue-600/25 hover:from-blue-700 hover:to-cyan-700 active:scale-95 transition-all cursor-pointer ring-1 ring-white/20"
             >
-              <Printer className="w-3.5 h-3.5 text-slate-300" />
-              <span>Report Memo</span>
+              <Printer className="w-3.5 h-3.5 text-blue-100" />
+              <span>Print Dossier</span>
             </button>
             <button
               onClick={() => onOpenDataEntry("review", employee.employee_id)}
-              className="inline-flex items-center gap-1 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 px-3.5 py-2 text-xs font-bold text-white shadow-md shadow-blue-600/20 hover:from-blue-700 hover:to-cyan-700 active:scale-98 transition-all cursor-pointer"
+              className="inline-flex items-center gap-1 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 px-3.5 py-2 text-xs font-bold text-white shadow-md shadow-blue-600/20 hover:from-blue-700 hover:to-cyan-700 active:scale-95 transition-all cursor-pointer ring-1 ring-white/10"
             >
               <PlusCircle className="w-3.5 h-3.5" />
               <span>Review</span>
             </button>
             <button
               onClick={() => onOpenDataEntry("attendance", employee.employee_id)}
-              className="inline-flex items-center gap-1 rounded-xl border px-3 py-2 text-xs font-bold active:scale-98 transition-all cursor-pointer border-slate-300/80 bg-white text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
+              className="inline-flex items-center gap-1 rounded-xl border px-3.5 py-2 text-xs font-bold active:scale-95 transition-all cursor-pointer border-slate-200 bg-white text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700 hover:border-emerald-500/40"
             >
-              <Calendar className="w-3.5 h-3.5 text-slate-400" />
+              <Calendar className="w-3.5 h-3.5 text-emerald-500" />
               <span>Attendance</span>
             </button>
             <button
               onClick={() => onOpenDataEntry("task", employee.employee_id)}
-              className="inline-flex items-center gap-1 rounded-xl border px-3 py-2 text-xs font-bold active:scale-98 transition-all cursor-pointer border-slate-300/80 bg-white text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
+              className="inline-flex items-center gap-1 rounded-xl border px-3.5 py-2 text-xs font-bold active:scale-95 transition-all cursor-pointer border-slate-200 bg-white text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700 hover:border-cyan-500/40"
             >
-              <CheckSquare className="w-3.5 h-3.5 text-slate-400" />
+              <CheckSquare className="w-3.5 h-3.5 text-cyan-500" />
               <span>Task</span>
             </button>
           </div>
@@ -277,7 +278,7 @@ export default function IndividualProfileView({
 
         {/* ── Summary Stats Strip for this Employee ──────────── */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-6 border-t border-slate-100 dark:border-slate-800">
-          <div className="rounded-xl p-4 border transition-all bg-amber-50/50 border-amber-100/80 dark:bg-amber-950/30 dark:border-amber-900/60 dark:hover:border-amber-600/50">
+          <div className="rounded-xl p-4 border transition-all bg-amber-50/50 border-amber-200/80 dark:bg-amber-950/30 dark:border-amber-900/60 dark:hover:border-amber-600/50">
             <div className="flex items-center justify-between text-amber-500 dark:text-amber-400 mb-1">
               <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                 Avg Rating
@@ -290,12 +291,19 @@ export default function IndividualProfileView({
               </span>
               <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">/ 5.0</span>
             </div>
-            <span className="text-[11px] font-medium mt-1 block text-slate-500 dark:text-slate-400">
+            {/* Capacity bar */}
+            <div className="mt-2 h-1 w-full overflow-hidden rounded-full bg-amber-200/50 dark:bg-amber-950">
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-amber-400 to-amber-600"
+                style={{ width: `${stats.avg_rating ? Math.round((stats.avg_rating / 5) * 100) : 0}%` }}
+              />
+            </div>
+            <span className="text-[10px] font-medium mt-1.5 block text-slate-500 dark:text-slate-400">
               Across {reviews.length} periods
             </span>
           </div>
 
-          <div className="rounded-xl p-4 border transition-all bg-sky-50/50 border-sky-100/80 dark:bg-cyan-950/30 dark:border-cyan-900/60 dark:hover:border-cyan-600/50">
+          <div className="rounded-xl p-4 border transition-all bg-sky-50/50 border-sky-200/80 dark:bg-cyan-950/30 dark:border-cyan-900/60 dark:hover:border-cyan-600/50">
             <div className="flex items-center justify-between text-cyan-500 dark:text-cyan-400 mb-1">
               <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                 Avg Goals Done
@@ -307,12 +315,19 @@ export default function IndividualProfileView({
                 {stats.avg_goals_completed !== null ? `${stats.avg_goals_completed}%` : "—"}
               </span>
             </div>
-            <span className="text-[11px] font-medium mt-1 block text-slate-500 dark:text-slate-400">
+            {/* Capacity bar */}
+            <div className="mt-2 h-1 w-full overflow-hidden rounded-full bg-cyan-200/50 dark:bg-cyan-950">
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-blue-500"
+                style={{ width: `${stats.avg_goals_completed || 0}%` }}
+              />
+            </div>
+            <span className="text-[10px] font-medium mt-1.5 block text-slate-500 dark:text-slate-400">
               Key Results success
             </span>
           </div>
 
-          <div className="rounded-xl p-4 border transition-all bg-emerald-50/50 border-emerald-100/80 dark:bg-emerald-950/30 dark:border-emerald-900/60 dark:hover:border-emerald-600/50">
+          <div className="rounded-xl p-4 border transition-all bg-emerald-50/50 border-emerald-200/80 dark:bg-emerald-950/30 dark:border-emerald-900/60 dark:hover:border-emerald-600/50">
             <div className="flex items-center justify-between text-emerald-500 dark:text-emerald-400 mb-1">
               <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                 Avg Attendance
@@ -324,7 +339,14 @@ export default function IndividualProfileView({
                 {stats.avg_attendance_rate !== null ? `${stats.avg_attendance_rate}%` : "—"}
               </span>
             </div>
-            <span className="text-[11px] font-medium mt-1 block text-slate-500 dark:text-slate-400">
+            {/* Capacity bar */}
+            <div className="mt-2 h-1 w-full overflow-hidden rounded-full bg-emerald-200/50 dark:bg-emerald-950">
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-emerald-400 to-teal-600"
+                style={{ width: `${stats.avg_attendance_rate || 0}%` }}
+              />
+            </div>
+            <span className="text-[10px] font-medium mt-1.5 block text-slate-500 dark:text-slate-400">
               Absenteeism: {stats.avg_absenteeism_rate || 0}%
             </span>
           </div>
@@ -341,7 +363,14 @@ export default function IndividualProfileView({
                 {stats.on_time_completion_rate}%
               </span>
             </div>
-            <span className="text-[11px] font-medium mt-1 block font-metric text-slate-500 dark:text-slate-400">
+            {/* Capacity bar */}
+            <div className="mt-2 h-1 w-full overflow-hidden rounded-full bg-teal-200/50 dark:bg-teal-950">
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-teal-400 to-cyan-600"
+                style={{ width: `${stats.on_time_completion_rate || 0}%` }}
+              />
+            </div>
+            <span className="text-[10px] font-medium mt-1.5 block font-metric text-slate-500 dark:text-slate-400">
               {stats.completed_tasks}/{stats.total_tasks} completed
             </span>
           </div>
@@ -349,7 +378,7 @@ export default function IndividualProfileView({
       </div>
 
       {/* ── Interactive Metric Dropdown & Trend Chart ───────── */}
-      <div className="rounded-2xl p-5 sm:p-6 border backdrop-blur-xl bg-white/95 border-slate-200/90 dark:bg-slate-900/75 dark:border-slate-800/90 shadow-xs">
+      <div className="rounded-2xl p-5 sm:p-6 border transition-all card-specular dark:bg-slate-900/80 dark:border-slate-800 shadow-sm">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
           <div>
             <div className="flex items-center gap-2">
@@ -569,7 +598,7 @@ export default function IndividualProfileView({
       </div>
 
       {/* ── Detail Records Section with Sub-Tabs ────────────── */}
-      <div className="rounded-2xl border backdrop-blur-xl overflow-hidden bg-white/95 border-slate-200/90 dark:bg-slate-900/75 dark:border-slate-800/90 shadow-xs">
+      <div className="rounded-2xl border overflow-hidden transition-all card-specular dark:bg-slate-900/80 dark:border-slate-800 shadow-sm">
         {/* Sub-tab navigation */}
         <div className="flex border-b px-4 sm:px-6 pt-3 gap-2 overflow-x-auto border-slate-200/90 bg-slate-50/80 dark:border-slate-800/80 dark:bg-slate-950/70">
           {[

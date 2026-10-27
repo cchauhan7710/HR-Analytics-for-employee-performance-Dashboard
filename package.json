@@ -1,0 +1,26 @@
+{
+  "name": "hr-pulse-workforce-analytics",
+  "version": "1.0.0",
+  "description": "Enterprise HR Analytics & Workforce Performance Intelligence Dashboard",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "install:all": "npm install --prefix Backend && npm install --prefix Frontend",
+    "build:frontend": "npm run build --prefix Frontend",
+    "build": "npm run build --prefix Frontend",
+    "start": "npm start --prefix Backend",
+    "dev:backend": "npm run dev --prefix Backend",
+    "dev:frontend": "npm run dev --prefix Frontend"
+  },
+  "keywords": [
+    "hr-analytics",
+    "dashboard",
+    "employee-performance",
+    "react",
+    "express",
+    "mysql"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

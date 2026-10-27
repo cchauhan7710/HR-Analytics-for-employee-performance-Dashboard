@@ -134,3 +134,59 @@ npm run build    # Create a production build
 npm run preview  # Preview the production build
 npm run lint     # Run ESLint
 ```
+
+---
+
+## 🚀 Production Deployment Guide
+
+The application is structured for flexibility: deploy Frontend and Backend together as a unified service, deploy them separately to cloud platforms, or deploy with Docker.
+
+### Option 1: Docker (Fastest, zero-config full stack)
+
+Launch MySQL 8.0 and the production HR Pulse service with a single command:
+
+```sh
+docker compose up -d --build
+```
+
+- Access the application at `http://localhost:5000`
+- MySQL initializes automatically from `Backend/src/database/schema.sql`
+
+---
+
+### Option 2: Unified Monorepo (Render, Railway, or AWS / VPS)
+
+The Backend automatically serves the compiled Frontend bundle from `Frontend/dist` in production:
+
+1. **Build command:** `npm run build` (runs `npm run build --prefix Frontend`)
+2. **Start command:** `npm start` (runs `npm start --prefix Backend`)
+3. **Environment variables on host:**
+   - `PORT=5000` (or host-assigned)
+   - `NODE_ENV=production`
+   - `DATABASE_URL` (or `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`, `DB_SSL=true`)
+   - `SECRET_KEY=your_jwt_secret`
+
+---
+
+### Option 3: Separate Frontend & Backend
+
+#### Backend (Render / Railway / Fly.io / AWS)
+1. Point root directory to `Backend/`
+2. **Build command:** `npm install`
+3. **Start command:** `npm start`
+4. **Environment variables:**
+   - `PORT=5000`
+   - `DATABASE_URL` or individual `DB_*` vars
+   - `SECRET_KEY=your_jwt_secret`
+   - `CLIENT_URL=https://your-frontend-domain.vercel.app`
+
+#### Frontend (Vercel / Netlify)
+1. Point root directory to `Frontend/`
+2. Framework: **Vite**
+3. **Build command:** `npm run build`
+4. **Output directory:** `dist`
+5. **Environment variables:**
+   - `VITE_API_BASE_URL=https://your-backend-domain.onrender.com/api`
+   - `VITE_AUTH_BASE_URL=https://your-backend-domain.onrender.com/api/auth`
+6. Vercel SPA routing is pre-configured via `vercel.json`; Netlify routing is pre-configured via `public/_redirects`.
+

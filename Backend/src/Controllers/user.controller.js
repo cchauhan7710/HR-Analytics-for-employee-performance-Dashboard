@@ -68,17 +68,17 @@ export const loginUser = async (req, res) => {
 
     const user = await getUserByEmail(email);
     if (!user)
-      return res.status(400).json({
+      return res.status(404).json({
         success: false,
-        message: "User not found please Login first",
+        message: "User not found. Please register first.",
       });
 
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
     if (!isPasswordCorrect) {
-      return res.status(409).json({
+      return res.status(401).json({
         success: false,
-        message: "Password is incorrect",
+        message: "Invalid email or password",
       });
     }
 
@@ -94,17 +94,14 @@ export const loginUser = async (req, res) => {
         expiresIn: "1d",
       },
     );
-    const refreshTokenHash = crypto
-      .createHash("sha256")
-      .update(refreshToken)
-      .digest("hex");
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: true,
+      secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
-      maxAge: 24 * 60 * 60 * 1000, // 1 day, matching your JWT expiry
+      maxAge: 24 * 60 * 60 * 1000,
     });
+
     const accessToken = jwt.sign(
       {
         id: user.id,
@@ -114,21 +111,28 @@ export const loginUser = async (req, res) => {
       },
       process.env.SECRET_KEY,
       {
-        expiresIn: 7 * 24 * 60 * 60 * 1000,
+        expiresIn: "7d",
       },
     );
 
-    return res.status(201).json({
+    const safeUser = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role || "viewer",
+    };
+
+    return res.status(200).json({
       accessToken,
       success: true,
-      message: "Login successFully !",
-      user,
+      message: "Login successfully!",
+      user: safeUser,
     });
   } catch (error) {
     console.error("login Error", error.message);
     return res.status(500).json({
       success: false,
-      message: "login error",
+      message: "Server login error",
       error: error.message,
     });
   }
