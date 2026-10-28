@@ -152,6 +152,11 @@ const Register = () => {
                   <option value="viewer" className="bg-slate-900 text-white">Viewer (Audit Read-Only)</option>
                 </select>
               </div>
+              <p className="text-[10px] text-slate-500 mt-1 pl-1">
+                {role === "admin" && "Full access — manage employees, reviews, tasks & all data."}
+                {role === "hr_manager" && "Can add & edit performance reviews, attendance & tasks."}
+                {role === "viewer" && "Read-only — can view dashboards but cannot modify data."}
+              </p>
             </div>
 
             <div>

@@ -11,9 +11,10 @@ import pool from "../../config/db.js";
 export const getEmployees = async (req, res) => {
   try {
     const { search = "", department = "", status = "", page, limit } = req.query;
+    const userId = req.user?.id;  // scoped to logged-in user
 
-    let query = "SELECT * FROM employees WHERE 1=1";
-    const params = [];
+    let query = "SELECT * FROM employees WHERE (user_id = ? OR user_id IS NULL)";
+    const params = [userId];
 
     if (search.trim()) {
       query += " AND (employee_id LIKE ? OR job_title LIKE ? OR department LIKE ?)";
@@ -44,9 +45,10 @@ export const getEmployees = async (req, res) => {
 
     const [rows] = await pool.query(query, params);
 
-    // Also get unique departments for quick filter population
+    // Also get unique departments for this user
     const [deptRows] = await pool.query(
-      "SELECT DISTINCT department FROM employees ORDER BY department ASC"
+      "SELECT DISTINCT department FROM employees WHERE (user_id = ? OR user_id IS NULL) ORDER BY department ASC",
+      [userId]
     );
 
     return res.status(200).json({
@@ -72,10 +74,11 @@ export const getEmployees = async (req, res) => {
 export const getEmployeeById = async (req, res) => {
   try {
     const { employeeId } = req.params;
+    const userId = req.user?.id;
 
     const [empRows] = await pool.query(
-      "SELECT * FROM employees WHERE employee_id = ?",
-      [employeeId]
+      "SELECT * FROM employees WHERE employee_id = ? AND (user_id = ? OR user_id IS NULL)",
+      [employeeId, userId]
     );
 
     if (empRows.length === 0) {
@@ -159,6 +162,7 @@ export const getEmployeeById = async (req, res) => {
 export const createEmployee = async (req, res) => {
   try {
     const { employee_id, department, job_title, date_joined, employment_status = "Active" } = req.body;
+    const userId = req.user?.id;
 
     if (!employee_id || !employee_id.trim()) {
       return res.status(400).json({ success: false, message: "Employee ID is required." });
@@ -173,10 +177,10 @@ export const createEmployee = async (req, res) => {
       return res.status(400).json({ success: false, message: "Date joined is required." });
     }
 
-    // Check duplicate
+    // Check duplicate within this user's scope
     const [existing] = await pool.query(
-      "SELECT employee_id FROM employees WHERE employee_id = ?",
-      [employee_id.trim().toUpperCase()]
+      "SELECT employee_id FROM employees WHERE employee_id = ? AND (user_id = ? OR user_id IS NULL)",
+      [employee_id.trim().toUpperCase(), userId]
     );
     if (existing.length > 0) {
       return res.status(409).json({
@@ -187,9 +191,9 @@ export const createEmployee = async (req, res) => {
 
     const cleanId = employee_id.trim().toUpperCase();
     await pool.query(
-      `INSERT INTO employees (employee_id, department, job_title, date_joined, employment_status)
-       VALUES (?, ?, ?, ?, ?)`,
-      [cleanId, department.trim(), job_title.trim(), date_joined, employment_status.trim()]
+      `INSERT INTO employees (employee_id, department, job_title, date_joined, employment_status, user_id)
+       VALUES (?, ?, ?, ?, ?, ?)`,
+      [cleanId, department.trim(), job_title.trim(), date_joined, employment_status.trim(), userId]
     );
 
     return res.status(201).json({
@@ -708,27 +712,31 @@ export const updateTask = async (req, res) => {
 export const getOverviewReport = async (req, res) => {
   try {
     const { department = "All", period = "All" } = req.query;
+    const userId = req.user?.id;
 
-    let empWhere = "";
-    let reviewWhere = "";
-    let attWhere = "";
-    let taskWhere = "";
+    // Base user-scope clause for employees
+    const userScope = "(user_id = " + pool.escape(userId) + " OR user_id IS NULL)";
+
+    let empWhere = `WHERE ${userScope}`;
+    let reviewWhere = `WHERE employee_id IN (SELECT employee_id FROM employees WHERE ${userScope})`;
+    let attWhere = `WHERE employee_id IN (SELECT employee_id FROM employees WHERE ${userScope})`;
+    let taskWhere = `WHERE employee_id IN (SELECT employee_id FROM employees WHERE ${userScope})`;
     const empParams = [];
     const reviewParams = [];
     const attParams = [];
     const taskParams = [];
 
     if (department && department !== "All") {
-      empWhere += " WHERE department = ?";
+      empWhere += " AND department = ?";
       empParams.push(department);
 
-      reviewWhere += " WHERE employee_id IN (SELECT employee_id FROM employees WHERE department = ?)";
+      reviewWhere += ` AND employee_id IN (SELECT employee_id FROM employees WHERE ${userScope} AND department = ?)`;
       reviewParams.push(department);
 
-      attWhere += " WHERE employee_id IN (SELECT employee_id FROM employees WHERE department = ?)";
+      attWhere += ` AND employee_id IN (SELECT employee_id FROM employees WHERE ${userScope} AND department = ?)`;
       attParams.push(department);
 
-      taskWhere += " WHERE employee_id IN (SELECT employee_id FROM employees WHERE department = ?)";
+      taskWhere += ` AND employee_id IN (SELECT employee_id FROM employees WHERE ${userScope} AND department = ?)`;
       taskParams.push(department);
     }
 
@@ -855,8 +863,10 @@ export const getOverviewReport = async (req, res) => {
        LEFT JOIN performance_reviews pr ON e.employee_id = pr.employee_id
        LEFT JOIN attendance_monthly am ON e.employee_id = am.employee_id
        LEFT JOIN tasks t ON e.employee_id = t.employee_id
+       WHERE (e.user_id = ? OR e.user_id IS NULL)
        GROUP BY e.department
-       ORDER BY e.department ASC`
+       ORDER BY e.department ASC`,
+      [userId]
     );
 
     // Enrich deptBreakdown with turnover from legacy database records if available
@@ -897,9 +907,10 @@ export const getOverviewReport = async (req, res) => {
       taskParams
     );
 
-    // 6. Departments list
+    // 6. Departments list (scoped to this user)
     const [deptList] = await pool.query(
-      "SELECT DISTINCT department FROM employees ORDER BY department ASC"
+      "SELECT DISTINCT department FROM employees WHERE (user_id = ? OR user_id IS NULL) ORDER BY department ASC",
+      [userId]
     );
 
     return res.status(200).json({

@@ -14,6 +14,13 @@ const Login = () => {
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState(location.state?.registeredMessage || "");
 
+  // Quick-fill demo credentials
+  const fillDemo = () => {
+    setEmail("rahulchauhaninbox@gmail.com");
+    setPassword("123456789");
+    setError("");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -165,10 +172,32 @@ const Login = () => {
           </div>
         </div>
 
+        {/* Demo quick-fill card */}
+        <button
+          type="button"
+          onClick={fillDemo}
+          className="mt-4 w-full text-left rounded-2xl border border-dashed border-blue-500/40 bg-blue-950/30 p-4 hover:border-blue-400/70 hover:bg-blue-950/50 transition-all cursor-pointer group"
+        >
+          <p className="text-[11px] font-bold text-blue-300 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+            <Sparkles className="w-3 h-3 text-cyan-400" />
+            Demo Account — click to auto-fill
+          </p>
+          <p className="text-[11px] text-slate-400 font-mono">
+            📧 rahulchauhaninbox@gmail.com
+          </p>
+          <p className="text-[11px] text-slate-400 font-mono">
+            🔑 123456789
+          </p>
+          <p className="text-[10px] text-slate-500 mt-1.5">
+            This account has 1,000 employees + 3 years of data pre-loaded.
+            Register a new account to start with your own fresh workspace.
+          </p>
+        </button>
+
         {/* Security badge footer */}
-        <div className="mt-6 flex items-center justify-center gap-2 text-[11px] text-slate-500">
+        <div className="mt-4 flex items-center justify-center gap-2 text-[11px] text-slate-500">
           <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
-          <span>Encrypted Enterprise Session • MySQL Live Sync</span>
+          <span>Encrypted Enterprise Session • JWT Auth • MySQL Live Sync</span>
         </div>
       </div>
     </main>

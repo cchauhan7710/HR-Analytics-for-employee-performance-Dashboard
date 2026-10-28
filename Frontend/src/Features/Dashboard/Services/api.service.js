@@ -12,33 +12,43 @@ const API_BASE_URL = rawApiUrl.endsWith("/api")
 
 const api = axios.create({
   baseURL: API_BASE_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
+  headers: { "Content-Type": "application/json" },
 });
 
-// Attach token if stored in localStorage
+// ── Attach JWT token from localStorage on every request ─────────────────────
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
+  const token =
+    localStorage.getItem("hr_token") || localStorage.getItem("token");
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
 });
 
-// Organization Overview & Reports
+// ── Auto-redirect to /login on 401 responses ─────────────────────────────────
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem("hr_token");
+      localStorage.removeItem("token");
+      localStorage.removeItem("hr_user");
+      localStorage.removeItem("user");
+      window.location.href = "/login";
+    }
+    return Promise.reject(error);
+  }
+);
+
+// ── Organization Overview & Reports ──────────────────────────────────────────
 export const fetchOverviewReport = async (department = "All", period = "All") => {
-  const res = await api.get("/reports/overview", {
-    params: { department, period },
-  });
+  const res = await api.get("/reports/overview", { params: { department, period } });
   return res.data;
 };
 
-// Employees
+// ── Employees ─────────────────────────────────────────────────────────────────
 export const fetchEmployees = async (search = "", department = "All", status = "All") => {
-  const res = await api.get("/employees", {
-    params: { search, department, status },
-  });
+  const res = await api.get("/employees", { params: { search, department, status } });
   return res.data;
 };
 
@@ -57,7 +67,7 @@ export const updateEmployee = async (employeeId, employeeData) => {
   return res.data;
 };
 
-// Performance Reviews
+// ── Performance Reviews ───────────────────────────────────────────────────────
 export const fetchEmployeePerformanceReviews = async (employeeId) => {
   const res = await api.get(`/employees/${employeeId}/performance-reviews`);
   return res.data;
@@ -68,7 +78,7 @@ export const createPerformanceReview = async (reviewData) => {
   return res.data;
 };
 
-// Attendance Monthly
+// ── Attendance Monthly ────────────────────────────────────────────────────────
 export const fetchEmployeeAttendance = async (employeeId) => {
   const res = await api.get(`/employees/${employeeId}/attendance`);
   return res.data;
@@ -79,7 +89,7 @@ export const createAttendanceRecord = async (attendanceData) => {
   return res.data;
 };
 
-// Tasks
+// ── Tasks ─────────────────────────────────────────────────────────────────────
 export const fetchEmployeeTasks = async (employeeId) => {
   const res = await api.get(`/employees/${employeeId}/tasks`);
   return res.data;
@@ -95,7 +105,7 @@ export const updateTask = async (taskId, taskData) => {
   return res.data;
 };
 
-// Individual Employee Report
+// ── Individual Employee Report ─────────────────────────────────────────────────
 export const fetchEmployeeReport = async (employeeId) => {
   const res = await api.get(`/reports/employee/${employeeId}`);
   return res.data;

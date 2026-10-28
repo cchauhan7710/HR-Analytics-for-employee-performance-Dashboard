@@ -1,20 +1,38 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, Navigate } from "react-router";
 import Login from "./Features/Auth/Pages/Login.jsx";
 import Register from "./Features/Auth/Pages/Register.jsx";
-import Home from "./Features/Auth/Pages/Home.jsx";
 import Dashboard from "./Features/Dashboard/Pages/Dashboard.jsx";
+import PrivateRoute from "./Features/Auth/Components/PrivateRoute.jsx";
+import PublicOnlyRoute from "./Features/Auth/Components/PublicOnlyRoute.jsx";
 
 export const router = createBrowserRouter([
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <PublicOnlyRoute>
+        <Login />
+      </PublicOnlyRoute>
+    ),
   },
   {
     path: "/register",
-    element: <Register />,
+    element: (
+      <PublicOnlyRoute>
+        <Register />
+      </PublicOnlyRoute>
+    ),
   },
   {
     path: "/",
-    element: <Dashboard />,
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
+  },
+  // Catch-all redirect
+  {
+    path: "*",
+    element: <Navigate to="/" replace />,
   },
 ]);

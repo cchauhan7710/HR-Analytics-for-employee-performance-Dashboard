@@ -6,12 +6,16 @@ import {
   FileBarChart2,
   PlusCircle,
   ChevronLeft,
-  ChevronRight,
   Sun,
   Moon,
   Search,
   X,
+  LogOut,
+  ShieldCheck,
+  Crown,
+  Eye,
 } from "lucide-react";
+import { useAuth } from "../../Auth/Hook/useAuth";
 
 export default function Sidebar({
   activeView,
@@ -25,6 +29,16 @@ export default function Sidebar({
   onOpenDataEntry,
   selectedEmployeeId,
 }) {
+  const { user, handleLogout } = useAuth();
+
+  // Role display helpers
+  const roleLabel = { admin: "Administrator", hr_manager: "HR Manager", viewer: "Viewer" };
+  const roleIcon  = { admin: Crown, hr_manager: ShieldCheck, viewer: Eye };
+  const RoleIcon  = roleIcon[user?.role] || ShieldCheck;
+  const initials  = user?.name
+    ? user.name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase()
+    : "HR";
+
   const navigationItems = [
     {
       id: "overview",
@@ -387,44 +401,84 @@ export default function Sidebar({
           </div>
         )}
 
-        {/* User Profile */}
+        {/* User Profile + Logout */}
         {isCollapsed ? (
-          <div className="flex justify-center">
+          <div className="flex flex-col items-center gap-1.5">
             <div
               className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border cursor-pointer ${
                 isDark ? "border-slate-800 bg-slate-900/70" : "border-slate-200 bg-white"
               }`}
-              title="HR Admin • Enterprise Access"
+              title={`${user?.name || "HR User"} • ${roleLabel[user?.role] || "Admin"}`}
             >
               <div className="relative flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-tr from-blue-600 to-cyan-500 text-white font-extrabold text-[10px] shadow-xs">
-                HR
+                {initials}
                 <div className="absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full border border-slate-950 bg-emerald-400" />
               </div>
             </div>
+            {/* Logout icon */}
+            <button
+              onClick={handleLogout}
+              title="Sign out"
+              className={`flex h-8 w-8 items-center justify-center rounded-xl border transition-colors cursor-pointer ${
+                isDark
+                  ? "border-slate-800 bg-slate-900/70 text-rose-400 hover:bg-rose-950/40 hover:border-rose-800"
+                  : "border-slate-200 bg-white text-rose-500 hover:bg-rose-50 hover:border-rose-300"
+              }`}
+            >
+              <LogOut className="w-3.5 h-3.5" />
+            </button>
           </div>
         ) : (
           <div
-            className={`flex items-center gap-2.5 rounded-xl border p-2 transition-all ${
-              isDark
-                ? "border-slate-800/90 bg-slate-900/70"
-                : "border-slate-200/90 bg-white"
+            className={`rounded-xl border p-2.5 transition-all ${
+              isDark ? "border-slate-800/90 bg-slate-900/70" : "border-slate-200/90 bg-white"
             }`}
           >
-            <div className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-tr from-blue-600 to-cyan-500 text-white font-extrabold text-[11px] shadow-sm">
-              HR
-              <div className="absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full border border-slate-950 bg-emerald-400" />
+            {/* User info row */}
+            <div className="flex items-center gap-2.5 mb-2">
+              <div className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-tr from-blue-600 to-cyan-500 text-white font-extrabold text-[11px] shadow-sm">
+                {initials}
+                <div className="absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full border border-slate-950 bg-emerald-400" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-xs font-bold leading-tight truncate text-slate-900 dark:text-slate-100">
+                  {user?.name || "HR User"}
+                </div>
+                <div className="text-[10px] text-slate-400 dark:text-slate-500 truncate mt-0.5">
+                  {user?.email || ""}
+                </div>
+              </div>
             </div>
 
-            <div className="flex-1 min-w-0">
-              <div className="text-xs font-bold leading-tight truncate text-slate-900 dark:text-slate-100">
-                HR Admin
-              </div>
-              <div className="text-[10px] text-slate-400 dark:text-slate-500 truncate mt-0.5">
-                Enterprise Access
-              </div>
+            {/* Role badge + logout */}
+            <div className="flex items-center justify-between gap-2">
+              <span className={`inline-flex items-center gap-1 text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${
+                user?.role === "admin"
+                  ? "bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/25"
+                  : user?.role === "hr_manager"
+                  ? "bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/25"
+                  : "bg-slate-500/15 text-slate-600 dark:text-slate-400 border border-slate-500/25"
+              }`}>
+                <RoleIcon className="w-2.5 h-2.5" />
+                {roleLabel[user?.role] || "Admin"}
+              </span>
+
+              <button
+                onClick={handleLogout}
+                title="Sign out of HR Pulse"
+                className={`inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-1 rounded-lg border transition-colors cursor-pointer ${
+                  isDark
+                    ? "border-slate-700/80 text-rose-400 hover:bg-rose-950/40 hover:border-rose-800 bg-slate-800/60"
+                    : "border-slate-200 text-rose-500 hover:bg-rose-50 hover:border-rose-300 bg-slate-50"
+                }`}
+              >
+                <LogOut className="w-3 h-3" />
+                Sign out
+              </button>
             </div>
           </div>
         )}
+
       </div>
     </div>
   );
