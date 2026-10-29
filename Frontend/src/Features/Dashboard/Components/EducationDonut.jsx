@@ -41,7 +41,10 @@ const renderCustomLabel = ({
 const EducationDonut = () => {
   return (
     <div className="chart-card">
-      <h3 className="chart-title">Attrition By Education</h3>
+      <div className="chart-header">
+        <h3 className="chart-title">Attrition By Education</h3>
+        <span className="chart-badge">Study</span>
+      </div>
       <ResponsiveContainer width="100%" height={220}>
         <PieChart>
           <Pie
@@ -49,10 +52,12 @@ const EducationDonut = () => {
             cx="50%"
             cy="50%"
             innerRadius={55}
-            outerRadius={80}
-            paddingAngle={2}
+            outerRadius={82}
+            paddingAngle={3}
             dataKey="value"
             labelLine={false}
+            stroke="#fff"
+            strokeWidth={2}
             label={renderCustomLabel}
           >
             {attritionByEducation.map((entry, index) => (
@@ -60,12 +65,16 @@ const EducationDonut = () => {
             ))}
           </Pie>
           <Tooltip
+            cursor={{ fill: "rgba(59,130,246,0.04)" }}
             contentStyle={{
-              background: "#fff",
-              border: "1px solid #e2e8f0",
-              borderRadius: 8,
+              background: "rgba(15,23,42,0.96)",
+              border: "1px solid rgba(148,163,184,0.28)",
+              borderRadius: 14,
+              padding: "10px 12px",
               fontSize: 12,
               fontFamily: "Inter, sans-serif",
+              color: "#e2e8f0",
+              boxShadow: "0 10px 25px rgba(15, 23, 42, 0.25)",
             }}
             formatter={(value, name) => [`${value}%`, name]}
           />

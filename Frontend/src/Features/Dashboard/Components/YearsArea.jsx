@@ -23,7 +23,10 @@ const LABELS = [
 const YearsArea = () => {
   return (
     <div className="chart-card">
-      <h3 className="chart-title">Attrition By Years At Company</h3>
+      <div className="chart-header">
+        <h3 className="chart-title">Attrition By Years At Company</h3>
+        <span className="chart-badge">Tenure</span>
+      </div>
       <ResponsiveContainer width="100%" height={180}>
         <AreaChart
           data={attritionByYears}
@@ -31,11 +34,12 @@ const YearsArea = () => {
         >
           <defs>
             <linearGradient id="yearsGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.35} />
-              <stop offset="95%" stopColor="#3b82f6" stopOpacity={0.02} />
+              <stop offset="5%" stopColor="#c9ae8a" stopOpacity={0.42} />
+              <stop offset="55%" stopColor="#b08967" stopOpacity={0.24} />
+              <stop offset="100%" stopColor="#b08967" stopOpacity={0.04} />
             </linearGradient>
           </defs>
-          <CartesianGrid stroke="#e2e8f0" strokeDasharray="3 3" />
+          <CartesianGrid stroke="rgba(148,163,184,0.28)" strokeDasharray="4 4" />
           <XAxis
             dataKey="year"
             tick={{ fontSize: 11, fontFamily: "Inter, sans-serif", fill: "#64748b" }}
@@ -49,22 +53,29 @@ const YearsArea = () => {
             domain={[0, 65]}
           />
           <Tooltip
+            cursor={{ stroke: "#0d2d5f", strokeDasharray: "4 4" }}
             contentStyle={{
-              background: "#fff",
-              border: "1px solid #e2e8f0",
-              borderRadius: 8,
+              background: "rgba(15,23,42,0.96)",
+              border: "1px solid rgba(148,163,184,0.28)",
+              borderRadius: 14,
+              padding: "10px 12px",
               fontSize: 12,
               fontFamily: "Inter, sans-serif",
+              color: "#e2e8f0",
+              boxShadow: "0 10px 25px rgba(15, 23, 42, 0.25)",
             }}
           />
           <Area
             type="monotone"
             dataKey="count"
-            stroke="#3b82f6"
-            strokeWidth={2.5}
+            stroke="#8d7158"
+            strokeWidth={3}
+            strokeLinecap="round"
+            strokeLinejoin="round"
             fill="url(#yearsGrad)"
+            fillOpacity={1}
             dot={false}
-            activeDot={{ r: 5, fill: "#3b82f6" }}
+            activeDot={{ r: 5, fill: "#8d7158", stroke: "#fff", strokeWidth: 2 }}
           />
           {LABELS.map((pt) => (
             <ReferenceDot

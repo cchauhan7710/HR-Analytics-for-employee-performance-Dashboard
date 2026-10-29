@@ -10,14 +10,14 @@ export default function MetricDefinitions({ isDark = true }) {
       unit: "1.0 - 5.0 scale",
       formula: "Appraisal Score recorded on half-yearly review",
       note: "Standard corporate performance grade (1 = Needs Improvement, 3 = Meets Expectations, 5 = Exceptional).",
-      accent: "border-blue-200/80 bg-blue-50/50 text-blue-700 dark:border-blue-800/80 dark:bg-blue-950/50 dark:text-blue-300",
+      accent: "border-[#dbeaf7]/80 bg-[#edf7ff]/80 text-[#0d2d5f] dark:border-[#6e90bb]/80 dark:bg-[#2b1c25]/80 dark:text-[#dfeef7]",
     },
     {
       name: "Goals Completed",
       unit: "Percentage (%)",
       formula: "(Completed Key Goals / Assigned Goals) × 100",
       note: "Measures milestone progress within the review period.",
-      accent: "border-cyan-200/80 bg-cyan-50/50 text-cyan-700 dark:border-cyan-800/80 dark:bg-cyan-950/50 dark:text-cyan-300",
+      accent: "border-[#edd7c7]/80 bg-[#fff7f1]/80 text-[#9b7258] dark:border-[#a78568]/80 dark:bg-[#2e231d]/80 dark:text-[#f6dcc6]",
     },
     {
       name: "Attendance Rate",
@@ -57,46 +57,40 @@ export default function MetricDefinitions({ isDark = true }) {
   ];
 
   return (
-    <div className="rounded-2xl border overflow-hidden mb-6 transition-all duration-300 card-specular shadow-sm">
+    <div className="mb-6 overflow-hidden rounded-2xl border border-[#2a466d] bg-[#0d1f35] shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_14px_32px_rgba(5,16,28,0.28)]">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between px-5 sm:px-6 py-4 text-left font-semibold transition-colors hover:bg-slate-50/70 dark:hover:bg-slate-800/50 cursor-pointer"
+        className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left transition-colors hover:bg-white/[0.02] cursor-pointer sm:px-5"
       >
-        <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-500/10 text-blue-500 border border-blue-500/20 shadow-xs">
+        <div className="flex min-w-0 items-center gap-3">
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-[#4d6d97] bg-[#17375d] text-white shadow-inner shadow-white/5">
             <BookOpen className="w-4 h-4" />
           </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-bold tracking-tight text-slate-900 dark:text-white">
-                Metric Definitions & Interpretation Guidelines
-              </span>
-              <span className="hidden sm:inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold border bg-slate-100 text-slate-600 border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700">
-                <Sparkles className="w-2.5 h-2.5 text-blue-500" />
-                KPI Formulas
-              </span>
-            </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400 font-normal">
-              Click to {isOpen ? "collapse" : "view"} formula breakdowns and analytical principles
-            </p>
+
+          <div className="min-w-0 flex items-center gap-2">
+            <span className="truncate text-sm font-bold tracking-tight text-white sm:text-[15px]">
+              Metric Definitions & Interpretation Guidelines
+            </span>
+            <span className="hidden sm:inline-flex items-center gap-1 rounded-full border border-[#3f5b7e] bg-[#122b47] px-2 py-0.5 text-[10px] font-bold text-slate-200">
+              <Sparkles className="w-2.5 h-2.5 text-[#8fd6ff]" />
+              KPI Formulas
+            </span>
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          <span className="inline-flex items-center gap-1 text-xs font-bold px-3 py-1.5 rounded-lg border transition-all bg-blue-50 text-blue-700 border-blue-200/80 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800/80">
-            {isOpen ? (
-              <>
-                <span>Hide Details</span>
-                <ChevronUp className="w-3.5 h-3.5" />
-              </>
-            ) : (
-              <>
-                <span>Show Details</span>
-                <ChevronDown className="w-3.5 h-3.5" />
-              </>
-            )}
-          </span>
-        </div>
+        <span className="inline-flex shrink-0 items-center gap-1 rounded-xl border border-[#3e5878] bg-[#13314b] px-3 py-1.5 text-[11px] font-bold text-white shadow-sm">
+          {isOpen ? (
+            <>
+              <span>Hide Details</span>
+              <ChevronUp className="w-3.5 h-3.5" />
+            </>
+          ) : (
+            <>
+              <span>Show Details</span>
+              <ChevronDown className="w-3.5 h-3.5" />
+            </>
+          )}
+        </span>
       </button>
 
       {isOpen && (

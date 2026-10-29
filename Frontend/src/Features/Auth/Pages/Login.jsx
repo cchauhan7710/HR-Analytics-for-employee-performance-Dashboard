@@ -48,11 +48,8 @@ const Login = () => {
           <div className="inline-flex items-center justify-center h-16 w-16 rounded-2xl bg-white/10 dark:bg-slate-900 border border-white/20 p-2 shadow-xl shadow-blue-600/30 ring-2 ring-white/10 mb-4 animate-in zoom-in-90 duration-300">
             <img src="/image.png" alt="HR Pulse Logo" className="h-full w-full object-contain" />
           </div>
-          <div className="flex items-center justify-center gap-2 mb-1">
+          <div className="mb-1">
             <h1 className="text-2xl font-black tracking-tight text-white">HR Pulse</h1>
-            <span className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider shadow-xs">
-              PRO
-            </span>
           </div>
           <p className="text-xs text-slate-400 font-medium max-w-xs mx-auto">
             Enterprise Workforce & Performance Intelligence System

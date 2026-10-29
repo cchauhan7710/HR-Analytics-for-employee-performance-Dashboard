@@ -16,20 +16,20 @@ export const departmentTabs = [
 ];
 
 export const attritionByEducation = [
-  { name: "Life Sciences", value: 38, color: "#4ade80" },
-  { name: "Medical", value: 27, color: "#facc15" },
-  { name: "Marketing", value: 15, color: "#f97316" },
-  { name: "Technical Degree", value: 14, color: "#818cf8" },
-  { name: "Other", value: 5, color: "#f472b6" },
-  { name: "Human Resources", value: 3, color: "#22d3ee" },
+  { name: "Life Sciences", value: 38, color: "#0d2d5f" },
+  { name: "Medical", value: 27, color: "#8cb6e0" },
+  { name: "Marketing", value: 15, color: "#7da0ca" },
+  { name: "Technical Degree", value: 14, color: "#1b5a92" },
+  { name: "Other", value: 5, color: "#1b5a92" },
+  { name: "Human Resources", value: 3, color: "#bfd8ea" },
 ];
 
 export const attritionByAge = [
-  { age: "26-35", count: 116, fill: "#3b82f6" },
-  { age: "18-25", count: 44, fill: "#4ade80" },
-  { age: "36-45", count: 43, fill: "#f97316" },
-  { age: "46-55", count: 26, fill: "#facc15" },
-  { age: "55+", count: 8, fill: "#f9a8d4" },
+  { age: "26-35", count: 116, fill: "#0d2d5f" },
+  { age: "18-25", count: 44, fill: "#8cb6e0" },
+  { age: "36-45", count: 43, fill: "#7da0ca" },
+  { age: "46-55", count: 26, fill: "#1b5a92" },
+  { age: "55+", count: 8, fill: "#1b5a92" },
 ];
 
 export const jobSatisfactionData = [
@@ -55,10 +55,10 @@ export const jobSatisfactionData = [
 ];
 
 export const attritionBySalary = [
-  { slab: "Upto 5k", count: 163, fill: "#3b82f6" },
-  { slab: "5k-10k", count: 49, fill: "#4ade80" },
-  { slab: "10k-15k", count: 20, fill: "#f97316" },
-  { slab: "15k+", count: 5, fill: "#facc15" },
+  { slab: "Upto 5k", count: 163, fill: "#0d2d5f" },
+  { slab: "5k-10k", count: 49, fill: "#8cb6e0" },
+  { slab: "10k-15k", count: 20, fill: "#7da0ca" },
+  { slab: "15k+", count: 5, fill: "#1b5a92" },
 ];
 
 export const attritionByYears = [
@@ -78,13 +78,13 @@ export const attritionByYears = [
 ];
 
 export const attritionByJobRole = [
-  { role: "Laboratory Technician", count: 62, fill: "#3b82f6" },
-  { role: "Sales Executive", count: 57, fill: "#4ade80" },
-  { role: "Research Scientist", count: 47, fill: "#f97316" },
-  { role: "Sales Representative", count: 33, fill: "#facc15" },
+  { role: "Laboratory Technician", count: 62, fill: "#0d2d5f" },
+  { role: "Sales Executive", count: 57, fill: "#8cb6e0" },
+  { role: "Research Scientist", count: 47, fill: "#7da0ca" },
+  { role: "Sales Representative", count: 33, fill: "#1b5a92" },
 ];
 
 export const genderData = [
-  { name: "Male", value: 150, color: "#3b82f6" },
-  { name: "Female", value: 87, color: "#a78bfa" },
+  { name: "Male", value: 150, color: "#0d2d5f" },
+  { name: "Female", value: 87, color: "#8cb6e0" },
 ];

@@ -55,33 +55,33 @@
 }
 
 body {
-  background-color: #f1f5f9;
-  color: #0f172a;
+  background-color: #dfeef7;
+  color: #112b4a;
 }
 .dark body,
 body.dark {
-  background-color: #090d16;
-  color: #f8fafc;
+  background-color: #081d33;
+  color: #edf7ff;
 }
 
-/* Luxury Ambient Background Glows */
+/* Premium blue ambient glows */
 .bg-mesh-dark {
-  background-color: #090d16;
+  background-color: #081d33;
   background-image: 
-    radial-gradient(ellipse 90% 60% at 50% -10%, rgba(37, 99, 235, 0.22), transparent 70%),
-    radial-gradient(ellipse 65% 45% at 95% 15%, rgba(6, 182, 212, 0.12), transparent 60%),
-    radial-gradient(circle at 10% 85%, rgba(99, 102, 241, 0.12), transparent 50%),
-    radial-gradient(circle at 85% 85%, rgba(16, 185, 129, 0.08), transparent 50%);
+    radial-gradient(ellipse 90% 60% at 50% -10%, rgba(66, 117, 178, 0.28), transparent 70%),
+    radial-gradient(ellipse 65% 45% at 95% 15%, rgba(127, 166, 214, 0.16), transparent 60%),
+    radial-gradient(circle at 10% 85%, rgba(29, 90, 146, 0.18), transparent 50%),
+    radial-gradient(circle at 85% 85%, rgba(145, 178, 218, 0.1), transparent 50%);
   background-attachment: fixed;
 }
 
 .bg-mesh-light {
-  background-color: #f1f5f9;
+  background-color: #dfeef7;
   background-image: 
-    radial-gradient(ellipse 90% 60% at 50% -10%, rgba(37, 99, 235, 0.11), transparent 70%),
-    radial-gradient(ellipse 65% 45% at 95% 15%, rgba(6, 182, 212, 0.08), transparent 60%),
-    radial-gradient(circle at 10% 85%, rgba(99, 102, 241, 0.07), transparent 50%),
-    radial-gradient(circle at 85% 85%, rgba(16, 185, 129, 0.05), transparent 50%);
+    radial-gradient(ellipse 90% 60% at 50% -10%, rgba(103, 146, 200, 0.18), transparent 70%),
+    radial-gradient(ellipse 65% 45% at 95% 15%, rgba(125, 160, 202, 0.12), transparent 60%),
+    radial-gradient(circle at 10% 85%, rgba(52, 97, 152, 0.09), transparent 50%),
+    radial-gradient(circle at 85% 85%, rgba(190, 218, 242, 0.08), transparent 50%);
   background-attachment: fixed;
 }
 
@@ -90,9 +90,9 @@ body.dark {
   position: relative;
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.03), 0 6px 20px -4px rgba(15, 23, 42, 0.06);
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(94, 131, 185, 0.16);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.02), 0 10px 24px -8px rgba(12, 45, 95, 0.08);
 }
 
 .card-specular::before {
@@ -109,15 +109,15 @@ body.dark {
 
 .card-specular:hover {
   transform: translateY(-2px);
-  border-color: #cbd5e1;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 14px 30px -4px rgba(15, 23, 42, 0.09);
+  border-color: rgba(30, 85, 141, 0.28);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 14px 30px -4px rgba(15, 59, 96, 0.12);
 }
 
 .dark .card-specular {
-  background: rgba(15, 23, 42, 0.78);
+  background: rgba(11, 25, 42, 0.78);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(150, 190, 234, 0.12);
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 

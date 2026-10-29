@@ -1,7 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════════════════
    HR Analytics Dashboard – Dashboard.css
-   Design tokens derived from the reference image (blue-cyan gradient bg,
-   white card tiles, Inter font, blue/green/orange accent palette)
+   Luxury light palette with warm neutrals, soft stone, and muted premium accents
    ═══════════════════════════════════════════════════════════════════════════ */
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
@@ -10,47 +9,47 @@
 :root {
   --font: "Inter", sans-serif;
 
-  /* Background gradient – soft blue-cyan as in the reference */
-  --bg-from: #dbeafe;   /* blue-100 */
-  --bg-mid:  #e0f2fe;   /* sky-100 */
-  --bg-to:   #f0fdf4;   /* green-50  */
+  /* Premium blue palette inspired by reference image */
+  --bg-from: #dfeef7;
+  --bg-mid:  #bfdaf1;
+  --bg-to:   #87afd8;
 
   /* Cards */
-  --card-bg: rgba(255, 255, 255, 0.88);
-  --card-border: rgba(203, 213, 225, 0.6);
-  --card-shadow: 0 2px 12px rgba(99, 102, 241, 0.08);
-  --card-radius: 12px;
+  --card-bg: rgba(255, 255, 255, 0.72);
+  --card-border: rgba(83, 119, 160, 0.18);
+  --card-shadow: 0 14px 32px rgba(20, 61, 99, 0.1);
+  --card-radius: 28px;
 
   /* Typography */
-  --text-primary: #1e293b;   /* slate-800 */
-  --text-secondary: #475569; /* slate-600 */
-  --text-muted: #94a3b8;     /* slate-400 */
+  --text-primary: #112b4a;
+  --text-secondary: #3d587b;
+  --text-muted: #6986a9;
 
-  /* Accent (matching the blue used throughout) */
-  --accent: #3b82f6;         /* blue-500  */
-  --accent-dark: #1d4ed8;    /* blue-700  */
-  --accent-light: #eff6ff;   /* blue-50   */
+  /* Premium blue accent */
+  --accent: #7da0ca;
+  --accent-dark: #0d2d5f;
+  --accent-light: #edf7ff;
 
   /* Tab active */
-  --tab-active-bg: #3b82f6;
+  --tab-active-bg: linear-gradient(135deg, #0d2d5f 0%, #1b5a92 100%);
   --tab-active-text: #ffffff;
-  --tab-idle-bg: rgba(255,255,255,0.55);
-  --tab-idle-text: #334155;
-  --tab-idle-border: rgba(148,163,184,0.5);
+  --tab-idle-bg: rgba(255,255,255,0.72);
+  --tab-idle-text: #3d587b;
+  --tab-idle-border: rgba(86, 122, 169, 0.2);
 
   /* KPI card */
-  --kpi-bg: rgba(255,255,255,0.92);
-  --kpi-value-color: #1e3a8a; /* blue-900 */
-  --kpi-label-color: #475569;
+  --kpi-bg: rgba(255,255,255,0.9);
+  --kpi-value-color: #112b4a;
+  --kpi-label-color: #3d587b;
 
   /* Chart title */
-  --chart-title-color: #2563eb; /* blue-600 */
+  --chart-title-color: #0d2d5f;
 
   /* Table */
   --table-header-bg: transparent;
-  --table-total-bg: #eff6ff;
-  --table-border: #e2e8f0;
-  --table-total-color: #1d4ed8;
+  --table-total-bg: #edf7ff;
+  --table-border: #d2e6f7;
+  --table-total-color: #0d2d5f;
 }
 
 /* ── Base Reset ────────────────────────────────────────────────────────── */
@@ -65,7 +64,7 @@
 /* ── Dashboard Root ────────────────────────────────────────────────────── */
 .dashboard-root {
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--bg-from) 0%, var(--bg-mid) 50%, var(--bg-to) 100%);
+  background: linear-gradient(180deg, #eaf5ff 0%, #d8ebfb 32%, #b7d4ef 100%);
   font-family: var(--font);
   color: var(--text-primary);
   padding: 18px 20px 30px;
@@ -106,37 +105,38 @@
 /* ── Department Tabs ───────────────────────────────────────────────────── */
 .dept-tabs {
   display: flex;
-  gap: 4px;
-  background: rgba(255,255,255,0.45);
-  border: 1px solid var(--tab-idle-border);
-  border-radius: 8px;
-  padding: 4px;
+  gap: 6px;
+  background: rgba(255,255,255,0.5);
+  border: 1px solid rgba(148,163,184,0.2);
+  border-radius: 14px;
+  padding: 5px;
   margin-left: 10px;
+  backdrop-filter: blur(12px);
 }
 
 .dept-tab {
   font-family: var(--font);
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--tab-idle-text);
   background: transparent;
   border: none;
-  border-radius: 6px;
-  padding: 6px 14px;
+  border-radius: 10px;
+  padding: 7px 14px;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  transition: all 0.2s ease;
   white-space: nowrap;
 }
 
 .dept-tab:hover {
-  background: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.7);
   color: var(--accent);
 }
 
 .dept-tab--active {
-  background: var(--tab-active-bg) !important;
-  color: var(--tab-active-text) !important;
-  box-shadow: 0 2px 8px rgba(59,130,246,0.35);
+  background: linear-gradient(180deg, #0d2d5f 0%, #1d5f9d 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 18px rgba(13,45,95,0.18);
 }
 
 /* ── Gender Box ────────────────────────────────────────────────────────── */
@@ -203,18 +203,18 @@
 
 /* KPI Card */
 .kpi-card {
-  background: var(--kpi-bg);
-  border: 1px solid var(--card-border);
-  border-radius: var(--card-radius);
-  padding: 14px 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.9) 100%);
+  border: 1px solid rgba(148,163,184,0.18);
+  border-radius: 24px;
+  padding: 16px 18px;
   text-align: center;
-  box-shadow: var(--card-shadow);
-  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .kpi-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(99,102,241,0.14);
+  box-shadow: 0 18px 32px rgba(15, 23, 42, 0.06);
 }
 
 .kpi-label {
@@ -252,29 +252,79 @@
 
 /* ── Shared Chart Card ─────────────────────────────────────────────────── */
 .chart-card {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: var(--card-radius);
-  padding: 16px 14px 10px;
-  box-shadow: var(--card-shadow);
-  transition: transform 0.2s, box-shadow 0.2s;
+  background: linear-gradient(180deg, rgba(255,255,255,0.82) 0%, rgba(233,244,255,0.96) 100%);
+  border: 1px solid rgba(101, 140, 189, 0.18);
+  border-radius: 30px;
+  padding: 18px 18px 12px;
+  box-shadow: 0 12px 32px rgba(19, 56, 94, 0.07);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   min-height: 240px;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .chart-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(99,102,241,0.12);
+  transform: translateY(-3px);
+  border-color: rgba(52, 101, 152, 0.24);
+  box-shadow: 0 18px 40px rgba(24, 63, 104, 0.08);
+}
+
+.chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
 .chart-title {
   font-size: 13px;
   font-weight: 700;
-  color: var(--chart-title-color);
-  text-align: center;
-  margin-bottom: 4px;
-  letter-spacing: 0.1px;
+  color: #1d1d1f;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.chart-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(18, 67, 122, 0.08);
+  color: #0d2d5f;
+  border: 1px solid rgba(18, 67, 122, 0.12);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 5px 8px;
+  line-height: 1;
+}
+
+.dark .chart-card {
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.92) 0%, rgba(15, 23, 42, 0.8) 100%);
+  border-color: rgba(148, 163, 184, 0.16);
+  box-shadow: 0 18px 38px -28px rgba(15, 23, 42, 0.8);
+}
+
+.dark .chart-card:hover {
+  border-color: rgba(144, 190, 236, 0.28);
+  box-shadow: 0 18px 42px rgba(12, 36, 64, 0.48);
+}
+
+.dark .chart-title {
+  color: #e5e7eb;
+}
+
+.dark .chart-badge {
+  background: rgba(144, 190, 236, 0.12);
+  border-color: rgba(144, 190, 236, 0.18);
+  color: #dfeeff;
+}
+
+.chart-card svg {
+  overflow: visible;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════

@@ -128,7 +128,7 @@ export default function Dashboard() {
 
   return (
     <div
-      className={`min-h-screen transition-colors duration-300 antialiased selection:bg-blue-600 selection:text-white print:min-h-0 print:bg-white print:text-black ${
+      className={`min-h-screen transition-colors duration-300 antialiased selection:bg-[#df7c4c] selection:text-white print:min-h-0 print:bg-white print:text-black ${
         isDark
           ? "dark bg-mesh-dark text-slate-100"
           : "bg-mesh-light text-slate-900"
@@ -150,8 +150,8 @@ export default function Dashboard() {
 
       {/* ── Main Layout Wrapper (Responsive to Sidebar Width) ── */}
       <div
-        className={`flex flex-col min-h-screen transition-all duration-300 ease-in-out print:pl-0 ${
-          isSidebarCollapsed ? "lg:pl-[68px]" : "lg:pl-[250px]"
+        className={`flex flex-col min-h-screen transition-[padding-left] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] print:pl-0 ${
+          isSidebarCollapsed ? "lg:pl-[68px]" : "lg:pl-[272px]"
         }`}
       >
         {/* ── Top Header Navigation Bar ── */}
@@ -162,10 +162,8 @@ export default function Dashboard() {
               : "border-slate-200/80 bg-white/85 shadow-xs shadow-slate-900/5"
           }`}
         >
-          <div className="w-full px-3 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-4">
-            {/* Left Side: Mobile Menu Button & Breadcrumbs */}
-            <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-              {/* Mobile Hamburger Toggle */}
+          <div className="w-full px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
+            <div className="flex min-w-0 flex-1 items-center gap-2 sm:gap-3">
               <button
                 onClick={() => setMobileSidebarOpen(true)}
                 className={`lg:hidden flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-xl border transition-colors cursor-pointer ${
@@ -178,7 +176,6 @@ export default function Dashboard() {
                 <Menu className="w-4 h-4" />
               </button>
 
-              {/* Desktop Quick Toggle Icon */}
               <button
                 onClick={toggleSidebarCollapse}
                 className={`hidden lg:flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border transition-all cursor-pointer ${
@@ -196,72 +193,36 @@ export default function Dashboard() {
                 )}
               </button>
 
-              {/* Breadcrumb Info */}
-              <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
-                <span className="hidden sm:inline text-xs font-semibold text-slate-400 dark:text-slate-500 shrink-0">
-                  HR Pulse
+              <div
+                className={`flex min-w-0 flex-1 items-center gap-2 rounded-full border px-2.5 py-1.5 ${
+                  isDark
+                    ? "border-slate-800 bg-slate-900/75 text-slate-200"
+                    : "border-slate-200 bg-white/90 text-slate-700 shadow-sm shadow-slate-200/80"
+                }`}
+              >
+                <span className="hidden sm:inline text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500 shrink-0">
+                  HR PULSE
                 </span>
-                <ChevronRight className="hidden sm:inline w-3.5 h-3.5 text-slate-400 dark:text-slate-600 shrink-0" />
-                <div className="flex items-center gap-1.5 sm:gap-2 min-w-0 truncate">
-                  <div
-                    className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-lg ${
-                      isDark
-                        ? "bg-blue-500/15 text-cyan-400"
-                        : "bg-blue-50 text-blue-600"
-                    }`}
-                  >
-                    <CurrentIcon className="w-3.5 h-3.5" />
-                  </div>
-                  <h1 className="text-xs sm:text-sm font-bold tracking-tight truncate text-slate-900 dark:text-white">
+                <ChevronRight className="hidden sm:inline w-3.5 h-3.5 text-slate-500 dark:text-slate-600 shrink-0" />
+                <div className="flex min-w-0 items-center gap-2">
+                  <span className="truncate text-xs sm:text-sm font-bold tracking-tight text-slate-900 dark:text-white">
                     {currentMeta.title}
-                  </h1>
+                  </span>
                 </div>
-                <span className="hidden md:inline text-[10px] font-semibold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-cyan-400 border border-blue-500/20 shrink-0">
+                <span className="hidden md:inline-flex items-center rounded-full border border-slate-700/80 bg-slate-800/70 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-[0.12em] text-slate-200">
                   {currentMeta.badge}
                 </span>
               </div>
             </div>
 
-            {/* Right Side: Quick Search, DB Live Status, Theme Toggle & Quick CTA */}
             <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
-              {/* Quick Search Shortcut Pill */}
-              <button
-                onClick={() => setActiveView("directory")}
-                title="Search directory (Ctrl+K / ⌘K)"
-                className="hidden md:flex items-center gap-2 rounded-xl px-2.5 py-1.5 border text-xs font-medium text-slate-400 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 border-slate-200/90 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-900/70 hover:border-blue-400/40 transition-all cursor-pointer group"
-              >
-                <Search className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-500 transition-colors" />
-                <span className="text-[11px] hidden lg:inline">Quick search</span>
-                <kbd className="text-[9px] font-mono uppercase bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-1.5 py-0.5 rounded text-slate-400 font-semibold shadow-xs">
-                  ⌘K
-                </kbd>
-              </button>
-
-              {/* MySQL Live Indicator */}
-              <div
-                className={`hidden xl:flex items-center gap-2 px-2.5 py-1.5 rounded-xl border text-[11px] font-semibold ${
-                  isDark
-                    ? "border-slate-800/90 bg-slate-900/60 text-slate-300"
-                    : "border-slate-200/90 bg-slate-50 text-slate-600"
-                }`}
-                title="MySQL Database Connected & Synchronized"
-              >
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </span>
-                <span>Live Sync</span>
-              </div>
-
-              {/* Primary Action Button */}
               <button
                 onClick={() => handleOpenDataEntry("review")}
-                className="flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-blue-600 via-blue-700 to-cyan-600 px-2.5 sm:px-3.5 py-1.5 sm:py-2 text-xs font-bold text-white shadow-md shadow-blue-600/30 hover:from-blue-700 hover:to-cyan-700 active:scale-95 transition-all cursor-pointer ring-1 ring-white/20"
+                className="flex items-center gap-1.5 rounded-[14px] bg-gradient-to-r from-[#0d2d5f] via-[#1b5a92] to-[#8cb6e0] px-3.5 sm:px-4 py-2 text-xs font-bold text-white shadow-[0_12px_24px_rgba(13,45,95,0.22)] ring-1 ring-white/15 hover:brightness-105 active:scale-95 transition-all cursor-pointer"
                 title="Add or update employee performance record"
               >
-                <PlusCircle className="w-3.5 h-3.5 text-blue-100" />
-                <span className="hidden sm:inline">Quick Entry</span>
-                <span className="sm:hidden">Entry</span>
+                <PlusCircle className="w-3.5 h-3.5 text-[#edf7ff]" />
+                <span>Quick Entry</span>
               </button>
             </div>
           </div>

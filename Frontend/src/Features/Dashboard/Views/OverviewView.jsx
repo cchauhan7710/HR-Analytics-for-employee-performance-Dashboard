@@ -36,12 +36,12 @@ import MetricCard from "../Components/MetricCard";
 import MetricDefinitions from "../Components/MetricDefinitions";
 import { fetchOverviewReport } from "../Services/api.service";
 
-const NEON_COLORS = ["#2563eb", "#06b6d4", "#10b981", "#f59e0b", "#0284c7", "#0d9488"];
+const NEON_COLORS = ["#021024", "#0d2d5f", "#1b5a92", "#7da0ca", "#bfd8ea", "#dfeef7"];
 const STATUS_COLORS = {
-  Completed: "#10b981",
-  "In Progress": "#2563eb",
-  "Not Started": "#64748b",
-  "Pending Review": "#f59e0b",
+  Completed: "#2d7fb8",
+  "In Progress": "#7da0ca",
+  "Not Started": "#8aa3be",
+  "Pending Review": "#b8d7f1",
 };
 
 // Premium Custom Tooltip Component for Recharts
@@ -63,7 +63,7 @@ const CustomChartTooltip = ({ active, payload, label, unit = "", isDark = true }
           <span>{label}</span>
           <span
             className={`text-[10px] font-semibold uppercase tracking-wider ${
-              isDark ? "text-cyan-400" : "text-blue-600"
+              isDark ? "text-[#dfeef7]" : "text-[#0d2d5f]"
             }`}
           >
             Metrics
@@ -121,8 +121,8 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
   if (loading && !data) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[460px] rounded-3xl p-8 border bg-white/80 border-slate-200/90 dark:bg-slate-900/60 dark:border-slate-800/90 shadow-xl">
-        <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 border border-blue-100 dark:bg-blue-500/10 dark:border-blue-500/20 shadow-xs mb-4">
-          <RefreshCw className="h-7 w-7 text-blue-600 animate-spin" />
+        <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-[#edf7ff] border border-[#dceaf8] dark:bg-[#0d2d5f]/10 dark:border-[#0d2d5f]/20 shadow-xs mb-4">
+          <RefreshCw className="h-7 w-7 text-[#0d2d5f] animate-spin" />
         </div>
         <h3 className="text-base font-bold text-slate-900 dark:text-white">Loading Enterprise Analytics</h3>
         <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-sm text-center">
@@ -164,10 +164,10 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
   return (
     <div className="space-y-6">
       {/* ── Filter Bar & Quick Operations ──────────────────────── */}
-      <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 rounded-2xl p-4 sm:p-5 border transition-all card-specular dark:bg-slate-900/80 dark:border-slate-800 shadow-sm">
+      <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 rounded-[18px] border border-[#2a466d] bg-[#0d1f35] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_14px_32px_rgba(5,16,28,0.28)] sm:p-5">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 shrink-0">
-            <Building2 className="w-4 h-4 text-blue-600 dark:text-cyan-400" />
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-400 shrink-0">
+            <Building2 className="w-4 h-4 text-[#8cb6e0]" />
             <span>Scope:</span>
           </div>
 
@@ -176,8 +176,8 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
               onClick={() => setSelectedDept("All")}
               className={`rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer ${
                 selectedDept === "All"
-                  ? "bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-md shadow-blue-600/25 ring-1 ring-white/10"
-                  : "bg-slate-100 text-slate-700 hover:bg-slate-200 dark:bg-slate-800/70 dark:text-slate-300 dark:hover:bg-slate-700/80"
+                  ? "bg-gradient-to-r from-[#0d2d5f] to-[#1b5a92] text-white shadow-md shadow-[#0d2d5f]/25 ring-1 ring-white/10"
+                  : "bg-[#17375d] text-slate-200 hover:bg-[#214a7a]"
               }`}
             >
               All Departments
@@ -188,8 +188,8 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
                 onClick={() => setSelectedDept(dept)}
                 className={`rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer ${
                   selectedDept === dept
-                    ? "bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-md shadow-blue-600/25 ring-1 ring-white/10"
-                    : "bg-slate-100 text-slate-700 hover:bg-slate-200 dark:bg-slate-800/70 dark:text-slate-300 dark:hover:bg-slate-700/80"
+                      ? "bg-gradient-to-r from-[#0d2d5f] to-[#1b5a92] text-white shadow-md shadow-[#0d2d5f]/25 ring-1 ring-white/10"
+                    : "bg-[#17375d] text-slate-200 hover:bg-[#214a7a]"
                 }`}
               >
                 {dept}
@@ -199,10 +199,10 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
         </div>
 
         {/* Quick Action Buttons */}
-        <div className="flex items-center gap-2 pt-2 lg:pt-0 border-t lg:border-t-0 border-slate-100 dark:border-slate-800 overflow-x-auto">
+        <div className="flex items-center gap-2 pt-2 lg:pt-0 border-t lg:border-t-0 border-[#2a466d] overflow-x-auto">
           <button
             onClick={() => onOpenDataEntry("review")}
-            className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 px-3.5 py-2 text-xs font-bold text-white shadow-md shadow-blue-600/20 hover:from-blue-700 hover:to-cyan-700 active:scale-98 transition-all shrink-0 cursor-pointer"
+            className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#0d2d5f] via-[#1b5a92] to-[#8cb6e0] px-3.5 py-2 text-xs font-bold text-white shadow-md shadow-[#0d2d5f]/20 hover:brightness-105 active:scale-98 transition-all shrink-0 cursor-pointer"
           >
             <PlusCircle className="w-3.5 h-3.5 text-blue-100" />
             <span>Add Review</span>
@@ -231,8 +231,6 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
           value={kpis.avg_review_rating ? `${kpis.avg_review_rating}` : "—"}
           unit="/ 5.0"
           subtitle={`${kpis.total_reviews || 0} reviews evaluated`}
-          badge={kpis.avg_review_rating >= 3.5 ? "Strong Grade" : "Baseline"}
-          badgeType="amber"
           icon={<Star className="w-5 h-5 text-amber-500 fill-amber-500/20" />}
         />
 
@@ -241,8 +239,6 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
           value={kpis.avg_goals_completed ? `${kpis.avg_goals_completed}` : "—"}
           unit="%"
           subtitle="Key Results progress"
-          badge={kpis.avg_goals_completed >= 70 ? "On Target" : "Review"}
-          badgeType="sky"
           icon={<Target className="w-5 h-5 text-cyan-500" />}
         />
 
@@ -251,8 +247,6 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
           value={kpis.avg_attendance_rate ? `${kpis.avg_attendance_rate}` : "—"}
           unit="%"
           subtitle={`Absenteeism: ${kpis.avg_absenteeism_rate || 0}%`}
-          badge="12M Mean"
-          badgeType="emerald"
           icon={<CalendarCheck className="w-5 h-5 text-emerald-500" />}
         />
 
@@ -261,8 +255,6 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
           value={kpis.turnover_rate !== undefined && kpis.turnover_rate !== null ? `${kpis.turnover_rate}` : "10.0"}
           unit="%"
           subtitle={`${kpis.exited_employees || 0} Exits • Retention ${kpis.retention_rate !== undefined ? kpis.retention_rate : 90}%`}
-          badge={(kpis.turnover_rate || 10) <= 12 ? "Healthy Rate" : "Elevated Risk"}
-          badgeType={(kpis.turnover_rate || 10) <= 12 ? "teal" : "rose"}
           icon={<UserMinus className="w-5 h-5 text-rose-500" />}
         />
 
@@ -271,8 +263,6 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
           value={kpis.on_time_completion_rate ? `${kpis.on_time_completion_rate}` : "—"}
           unit="%"
           subtitle={`Avg Speed: ${kpis.avg_completion_days || 0} days`}
-          badge={`${kpis.completed_tasks || 0} done`}
-          badgeType="teal"
           icon={<Clock className="w-5 h-5 text-teal-500" />}
         />
 
@@ -281,9 +271,7 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
           value={kpis.total_employees}
           unit="Headcount"
           subtitle={`${kpis.active_employees} Active Status`}
-          badge={selectedDept === "All" ? "Company-wide" : selectedDept}
-          badgeType="blue"
-          icon={<Users2 className="w-5 h-5 text-blue-600 dark:text-blue-400" />}
+          icon={<Users2 className="w-5 h-5 text-[#0d2d5f] dark:text-[#dfeef7]" />}
         />
       </div>
 
@@ -293,22 +281,21 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
       {/* ── Charts Grid (2x2 Multi-Perspective Visualizations) ── */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
         {/* Chart 1: Appraisal Review Trends */}
-        <div className="rounded-2xl p-5 sm:p-6 border transition-all card-specular dark:bg-slate-900/80 dark:border-slate-800 shadow-sm">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-4">
-            <div>
-              <div className="flex items-center gap-2">
-                <BarChart3 className="w-4 h-4 text-blue-600 dark:text-cyan-400" />
-                <h3 className="text-sm font-bold tracking-tight text-slate-900 dark:text-white">
+        <div className="rounded-[18px] border border-[#2a466d] bg-[#0d1f35] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_14px_32px_rgba(5,16,28,0.28)] sm:p-6">
+          <div className="mb-4 flex flex-col items-start justify-between gap-2 sm:flex-row sm:items-center">
+            <div className="flex items-center gap-3">
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-[#44658d] bg-[#17375d] text-white shadow-inner shadow-white/5">
+                <BarChart3 className="w-4 h-4" />
+              </div>
+              <div>
+                <h3 className="text-[15px] font-bold tracking-tight text-white">
                   Multi-Period Performance Appraisal Trend
                 </h3>
+                <p className="mt-0.5 text-xs text-slate-400">
+                  Half-yearly review history (2023-H1 to 2025-H2)
+                </p>
               </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                Half-yearly review history (2023-H1 to 2025-H2)
-              </p>
             </div>
-            <span className="inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800/80">
-              6 Review Periods
-            </span>
           </div>
 
           <div className="h-72 sm:h-80 w-full">
@@ -319,15 +306,15 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
                 <YAxis
                   yAxisId="left"
                   domain={[1, 5]}
-                  tick={{ fontSize: 11, fill: isDark ? "#60a5fa" : "#2563eb" }}
-                  label={{ value: "Rating (/5)", angle: -90, position: "insideLeft", fontSize: 10, fill: isDark ? "#60a5fa" : "#2563eb" }}
+                  tick={{ fontSize: 11, fill: isDark ? "#bfd8ea" : "#0d2d5f" }}
+                  label={{ value: "Rating (/5)", angle: -90, position: "insideLeft", fontSize: 10, fill: isDark ? "#dfeef7" : "#0d2d5f" }}
                 />
                 <YAxis
                   yAxisId="right"
                   orientation="right"
                   domain={[0, 100]}
-                  tick={{ fontSize: 11, fill: "#06b6d4" }}
-                  label={{ value: "Goals (%)", angle: 90, position: "insideRight", fontSize: 10, fill: "#06b6d4" }}
+                  tick={{ fontSize: 11, fill: "#1b5a92" }}
+                  label={{ value: "Goals (%)", angle: 90, position: "insideRight", fontSize: 10, fill: "#1b5a92" }}
                 />
                 <Tooltip content={<CustomChartTooltip isDark={isDark} />} />
                 <Legend wrapperStyle={{ fontSize: "11px", paddingTop: "10px" }} />
@@ -335,19 +322,20 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
                   yAxisId="right"
                   dataKey="avg_goals_completed"
                   name="Avg Goals Completed (%)"
-                  fill="#06b6d4"
-                  radius={[4, 4, 0, 0]}
-                  opacity={0.85}
+                  fill="#1b5a92"
+                  radius={[8, 8, 0, 0]}
+                  opacity={0.9}
                 />
                 <Line
                   yAxisId="left"
                   type="monotone"
                   dataKey="avg_rating"
                   name="Avg Rating (out of 5)"
-                  stroke={isDark ? "#60a5fa" : "#2563eb"}
+                  stroke={isDark ? "#8cb6e0" : "#1b5a92"}
                   strokeWidth={3}
-                  dot={{ r: 5, fill: "#2563eb", strokeWidth: 2, stroke: "#fff" }}
-                  activeDot={{ r: 7 }}
+                  strokeLinecap="round"
+                  dot={{ r: 4.5, fill: "#1b5a92", strokeWidth: 2, stroke: "#fff" }}
+                  activeDot={{ r: 7, fill: "#1b5a92", stroke: "#fff", strokeWidth: 2 }}
                 />
               </ComposedChart>
             </ResponsiveContainer>
@@ -355,22 +343,21 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
         </div>
 
         {/* Chart 2: Monthly Attendance Trend */}
-        <div className="rounded-2xl p-5 sm:p-6 border transition-all card-specular dark:bg-slate-900/80 dark:border-slate-800 shadow-sm">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-4">
-            <div>
-              <div className="flex items-center gap-2">
-                <CalendarCheck className="w-4 h-4 text-emerald-500" />
-                <h3 className="text-sm font-bold tracking-tight text-slate-900 dark:text-white">
+        <div className="rounded-[18px] border border-[#2a466d] bg-[#0d1f35] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_14px_32px_rgba(5,16,28,0.28)] sm:p-6">
+          <div className="mb-4 flex flex-col items-start justify-between gap-2 sm:flex-row sm:items-center">
+            <div className="flex items-center gap-3">
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-[#44658d] bg-[#17375d] text-white shadow-inner shadow-white/5">
+                <CalendarCheck className="w-4 h-4 text-emerald-400" />
+              </div>
+              <div>
+                <h3 className="text-[15px] font-bold tracking-tight text-white">
                   Monthly Attendance & Absenteeism Pattern
                 </h3>
+                <p className="mt-0.5 text-xs text-slate-400">
+                  Calendar Year 2025 monthly tracking (Original % Units)
+                </p>
               </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                Calendar Year 2025 monthly tracking (Original % Units)
-              </p>
             </div>
-            <span className="inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-100 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/80">
-              12 Months
-            </span>
           </div>
 
           <div className="h-72 sm:h-80 w-full">
@@ -413,22 +400,21 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
         </div>
 
         {/* Chart 3: Department Comparison */}
-        <div className="rounded-2xl p-5 sm:p-6 border transition-all card-specular dark:bg-slate-900/80 dark:border-slate-800 shadow-sm">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-4">
-            <div>
-              <div className="flex items-center gap-2">
-                <Building2 className="w-4 h-4 text-blue-600 dark:text-cyan-400" />
-                <h3 className="text-sm font-bold tracking-tight text-slate-900 dark:text-white">
+        <div className="rounded-[18px] border border-[#2a466d] bg-[#0d1f35] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_14px_32px_rgba(5,16,28,0.28)] sm:p-6">
+          <div className="mb-4 flex flex-col items-start justify-between gap-2 sm:flex-row sm:items-center">
+            <div className="flex items-center gap-3">
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-[#44658d] bg-[#17375d] text-white shadow-inner shadow-white/5">
+                <Building2 className="w-4 h-4" />
+              </div>
+              <div>
+                <h3 className="text-[15px] font-bold tracking-tight text-white">
                   Department Performance Benchmarks
                 </h3>
+                <p className="mt-0.5 text-xs text-slate-400">
+                  Cross-department average rating vs. on-time delivery
+                </p>
               </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                Cross-department average rating vs. on-time delivery
-              </p>
             </div>
-            <span className="inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 border border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700">
-              {deptBreakdown.length} Departments
-            </span>
           </div>
 
           <div className="h-72 sm:h-80 w-full">
@@ -439,15 +425,15 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
                 <YAxis
                   yAxisId="rating"
                   domain={[0, 5]}
-                  tick={{ fontSize: 11, fill: isDark ? "#60a5fa" : "#2563eb" }}
-                  label={{ value: "Rating (/5)", angle: -90, position: "insideLeft", fontSize: 10, fill: isDark ? "#60a5fa" : "#2563eb" }}
+                  tick={{ fontSize: 11, fill: isDark ? "#bfd8ea" : "#0d2d5f" }}
+                  label={{ value: "Rating (/5)", angle: -90, position: "insideLeft", fontSize: 10, fill: isDark ? "#dfeef7" : "#0d2d5f" }}
                 />
                 <YAxis
                   yAxisId="onTime"
                   orientation="right"
                   domain={[0, 100]}
-                  tick={{ fontSize: 11, fill: "#10b981" }}
-                  label={{ value: "On-Time %", angle: 90, position: "insideRight", fontSize: 10, fill: "#10b981" }}
+                  tick={{ fontSize: 11, fill: "#1b5a92" }}
+                  label={{ value: "On-Time %", angle: 90, position: "insideRight", fontSize: 10, fill: "#1b5a92" }}
                 />
                 <Tooltip content={<CustomChartTooltip isDark={isDark} />} />
                 <Legend wrapperStyle={{ fontSize: "11px", paddingTop: "10px" }} />
@@ -455,15 +441,15 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
                   yAxisId="rating"
                   dataKey="avg_rating"
                   name="Avg Rating (/5)"
-                  fill="#2563eb"
-                  radius={[4, 4, 0, 0]}
+                  fill="#1b5a92"
+                  radius={[8, 8, 0, 0]}
                 />
                 <Bar
                   yAxisId="onTime"
                   dataKey="on_time_rate"
                   name="On-Time Delivery %"
-                  fill="#10b981"
-                  radius={[4, 4, 0, 0]}
+                  fill="#7da0ca"
+                  radius={[8, 8, 0, 0]}
                 />
               </BarChart>
             </ResponsiveContainer>
@@ -471,22 +457,21 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
         </div>
 
         {/* Chart 4: Task Execution & Status Breakdown */}
-        <div className="rounded-2xl p-5 sm:p-6 border transition-all card-specular dark:bg-slate-900/80 dark:border-slate-800 shadow-sm">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-4">
-            <div>
-              <div className="flex items-center gap-2">
-                <CheckSquare className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
-                <h3 className="text-sm font-bold tracking-tight text-slate-900 dark:text-white">
+        <div className="rounded-[18px] border border-[#2a466d] bg-[#0d1f35] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_14px_32px_rgba(5,16,28,0.28)] sm:p-6">
+          <div className="mb-4 flex flex-col items-start justify-between gap-2 sm:flex-row sm:items-center">
+            <div className="flex items-center gap-3">
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-[#44658d] bg-[#17375d] text-white shadow-inner shadow-white/5">
+                <CheckSquare className="w-4 h-4" />
+              </div>
+              <div>
+                <h3 className="text-[15px] font-bold tracking-tight text-white">
                   Operational Task Execution Breakdown
                 </h3>
+                <p className="mt-0.5 text-xs text-slate-400">
+                  Distribution of assigned tasks across workflow statuses
+                </p>
               </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                Distribution of assigned tasks across workflow statuses
-              </p>
             </div>
-            <span className="inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-lg bg-cyan-50 text-cyan-700 border border-cyan-200 dark:bg-cyan-950/60 dark:text-cyan-300 dark:border-cyan-800/80">
-              3,000 Tasks Total
-            </span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-72 sm:h-80 items-center">
@@ -539,7 +524,7 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
                     tick={{ fontSize: 11, fill: axisColor }}
                   />
                   <Tooltip content={<CustomChartTooltip isDark={isDark} />} />
-                  <Bar dataKey="count" name="Tasks" fill="#0284c7" radius={[0, 4, 4, 0]} />
+                  <Bar dataKey="count" name="Tasks" fill="#1b5a92" radius={[0, 8, 8, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -548,15 +533,17 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
       </div>
 
       {/* ── Department Benchmarks Data Table ──────────────────── */}
-      <div className="rounded-2xl p-5 sm:p-6 border transition-all card-specular dark:bg-slate-900/80 dark:border-slate-800 shadow-sm">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-2">
-            <Layers className="w-4 h-4 text-blue-600 dark:text-cyan-400" />
-            <h3 className="text-sm font-bold tracking-tight text-slate-900 dark:text-white">
+      <div className="rounded-[18px] border border-[#2a466d] bg-[#0d1f35] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_14px_32px_rgba(5,16,28,0.28)] sm:p-6">
+        <div className="mb-4 flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-[#44658d] bg-[#17375d] text-white shadow-inner shadow-white/5">
+              <Layers className="w-4 h-4" />
+            </div>
+            <h3 className="text-[15px] font-bold tracking-tight text-white">
               Department Performance Matrix
             </h3>
           </div>
-          <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+          <span className="text-xs text-slate-400 font-medium">
             Aggregated Across All Active Employees
           </span>
         </div>
@@ -564,7 +551,7 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="border-b bg-slate-100/80 border-slate-200 text-slate-700 dark:bg-slate-950/60 dark:border-slate-800 dark:text-slate-400">
+              <tr className="border-b border-[#2a466d] bg-[#122948] text-slate-300">
                 <th className="py-3 px-4 font-bold">Department</th>
                 <th className="py-3 px-4 font-bold text-right">Headcount</th>
                 <th className="py-3 px-4 font-bold text-right">Avg Rating</th>
@@ -575,36 +562,36 @@ export default function OverviewView({ isDark = true, onOpenDataEntry, onSelectE
                 <th className="py-3 px-4 font-bold text-right">On-Time %</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60">
+            <tbody className="divide-y divide-[#223e63]">
               {deptBreakdown.map((row) => (
                 <tr
                   key={row.department}
-                  className="hover:bg-blue-50/60 dark:hover:bg-blue-950/30 transition-colors group cursor-pointer"
+                  className="transition-colors group cursor-pointer hover:bg-[#122948]"
                   onClick={() => setSelectedDept(row.department)}
                 >
-                  <td className="py-3 px-4 font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                    <span className="h-2 w-2 rounded-full bg-blue-600 group-hover:scale-125 transition-transform" />
+                  <td className="py-3 px-4 font-bold text-white flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-[#8cb6e0] group-hover:scale-125 transition-transform" />
                     <span>{row.department}</span>
                   </td>
-                  <td className="py-3 px-4 text-right font-metric text-slate-700 dark:text-slate-300 font-semibold">
+                  <td className="py-3 px-4 text-right font-metric text-slate-200 font-semibold">
                     {row.employee_count}
                   </td>
-                  <td className="py-3 px-4 text-right font-metric font-bold text-blue-600 dark:text-cyan-400">
+                  <td className="py-3 px-4 text-right font-metric font-bold text-[#dfeef7]">
                     {row.avg_rating} / 5.0
                   </td>
-                  <td className="py-3 px-4 text-right font-metric text-slate-700 dark:text-slate-300 font-semibold">
+                  <td className="py-3 px-4 text-right font-metric text-slate-200 font-semibold">
                     {row.avg_goals_completed}%
                   </td>
-                  <td className="py-3 px-4 text-right font-metric text-emerald-600 dark:text-emerald-400 font-bold">
+                  <td className="py-3 px-4 text-right font-metric text-emerald-400 font-bold">
                     {row.avg_attendance_rate}%
                   </td>
-                  <td className="py-3 px-4 text-right font-metric font-bold text-rose-600 dark:text-rose-400">
+                  <td className="py-3 px-4 text-right font-metric font-bold text-rose-400">
                     {row.turnover_rate !== undefined ? `${row.turnover_rate}%` : "0.0%"}
                   </td>
-                  <td className="py-3 px-4 text-right font-metric text-slate-600 dark:text-slate-400">
+                  <td className="py-3 px-4 text-right font-metric text-slate-300">
                     {row.total_tasks}
                   </td>
-                  <td className="py-3 px-4 text-right font-metric font-bold text-slate-900 dark:text-slate-200">
+                  <td className="py-3 px-4 text-right font-metric font-bold text-slate-100">
                     {row.on_time_rate}%
                   </td>
                 </tr>

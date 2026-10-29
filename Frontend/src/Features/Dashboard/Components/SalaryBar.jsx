@@ -15,7 +15,10 @@ import { attritionBySalary } from "../data/hrData";
 const SalaryBar = () => {
   return (
     <div className="chart-card">
-      <h3 className="chart-title">Attrition By Salary Slab</h3>
+      <div className="chart-header">
+        <h3 className="chart-title">Attrition By Salary Slab</h3>
+        <span className="chart-badge">Salary</span>
+      </div>
       <ResponsiveContainer width="100%" height={180}>
         <BarChart
           layout="vertical"
@@ -23,7 +26,7 @@ const SalaryBar = () => {
           margin={{ top: 5, right: 40, left: 10, bottom: 5 }}
           barCategoryGap="25%"
         >
-          <CartesianGrid horizontal={false} stroke="#e2e8f0" strokeDasharray="3 3" />
+          <CartesianGrid horizontal={false} stroke="rgba(148,163,184,0.28)" strokeDasharray="4 4" />
           <XAxis
             type="number"
             tick={{ fontSize: 11, fontFamily: "Inter, sans-serif", fill: "#64748b" }}
@@ -40,15 +43,19 @@ const SalaryBar = () => {
             width={60}
           />
           <Tooltip
+            cursor={{ fill: "rgba(59,130,246,0.04)" }}
             contentStyle={{
-              background: "#fff",
-              border: "1px solid #e2e8f0",
-              borderRadius: 8,
+              background: "rgba(15,23,42,0.96)",
+              border: "1px solid rgba(148,163,184,0.28)",
+              borderRadius: 14,
+              padding: "10px 12px",
               fontSize: 12,
               fontFamily: "Inter, sans-serif",
+              color: "#e2e8f0",
+              boxShadow: "0 10px 25px rgba(15, 23, 42, 0.25)",
             }}
           />
-          <Bar dataKey="count" radius={[0, 4, 4, 0]} maxBarSize={22}>
+          <Bar dataKey="count" radius={[0, 14, 14, 0]} maxBarSize={26}>
             {attritionBySalary.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={entry.fill} />
             ))}
