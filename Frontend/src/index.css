@@ -236,6 +236,38 @@ body.dark {
     color: #0f172a !important;
   }
 
+  /* Keep all PDF text readable on white paper */
+  .printable-dossier,
+  .printable-dossier * {
+    color: #0f172a !important;
+    background-color: transparent !important;
+    border-color: #cbd5e1 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  .printable-dossier .text-slate-300,
+  .printable-dossier .text-slate-400,
+  .printable-dossier .text-slate-500,
+  .printable-dossier .text-slate-600,
+  .printable-dossier .text-slate-700,
+  .printable-dossier .text-slate-800,
+  .printable-dossier .text-slate-900,
+  .printable-dossier .text-slate-950 {
+    color: #0f172a !important;
+  }
+
+  .printable-dossier .text-blue-600,
+  .printable-dossier .text-blue-700,
+  .printable-dossier .text-cyan-400,
+  .printable-dossier .text-emerald-600,
+  .printable-dossier .text-emerald-700,
+  .printable-dossier .text-amber-500,
+  .printable-dossier .text-rose-600,
+  .printable-dossier .text-violet-600 {
+    color: #0f172a !important;
+  }
+
   /* Clean print borders & backgrounds */
   .print-clean-box {
     background: #f8fafc !important;
