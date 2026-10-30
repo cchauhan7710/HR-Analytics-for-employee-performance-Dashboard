@@ -43,7 +43,7 @@ export default function Dashboard() {
 
   // Premium Theme Switcher: Defaults to "dark" (Obsidian Luxe) with option to switch to "light" (Quartz)
   const [theme, setTheme] = useState(() => {
-    return localStorage.getItem("hr_theme") || "dark";
+    return localStorage.getItem("hr_theme") || "light";
   });
 
   const isDark = theme === "dark";
