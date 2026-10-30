@@ -100,6 +100,15 @@ export const createTask = async (taskData) => {
   return res.data;
 };
 
+export const importEmployeesFromExcel = async (formData) => {
+  const res = await api.post("/legacy-employees/importEmployeesFromExcel", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return res.data;
+};
+
 export const updateTask = async (taskId, taskData) => {
   const res = await api.patch(`/tasks/${taskId}`, taskData);
   return res.data;

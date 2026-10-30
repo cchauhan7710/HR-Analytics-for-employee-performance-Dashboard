@@ -7,6 +7,8 @@ import {
   CheckSquare,
   UserPlus,
   Save,
+  Upload,
+  FileSpreadsheet,
   Database,
   AlertCircle,
   CheckCircle2,
@@ -17,6 +19,7 @@ import {
   createPerformanceReview,
   createAttendanceRecord,
   createTask,
+  importEmployeesFromExcel,
 } from "../Services/api.service";
 
 export default function DataEntryModal({
@@ -63,6 +66,9 @@ export default function DataEntryModal({
   const [taskCompleted, setTaskCompleted] = useState("");
   const [taskStatus, setTaskStatus] = useState("In Progress");
   const [taskPriority, setTaskPriority] = useState("Medium");
+
+  const [excelFile, setExcelFile] = useState(null);
+  const [excelFileName, setExcelFileName] = useState("");
 
   if (!isOpen) return null;
 
@@ -146,6 +152,23 @@ export default function DataEntryModal({
           priority: taskPriority,
         });
         setSuccessMsg(res.message || "Task assigned successfully!");
+      } else if (mode === "excel") {
+        if (!excelFile) throw new Error("Please choose an Excel file to upload.");
+
+        const allowedExtensions = [".xlsx", ".xls", ".csv"];
+        const hasValidExtension = allowedExtensions.some((ext) =>
+          excelFile.name.toLowerCase().endsWith(ext)
+        );
+
+        if (!hasValidExtension) {
+          throw new Error("Only Excel or CSV files are supported.");
+        }
+
+        const formData = new FormData();
+        formData.append("file", excelFile);
+
+        const res = await importEmployeesFromExcel(formData);
+        setSuccessMsg(res.message || "Excel data imported successfully!");
       }
 
       setTimeout(() => {
@@ -164,26 +187,38 @@ export default function DataEntryModal({
     { id: "attendance", label: "Attendance Log", icon: Calendar },
     { id: "task", label: "Task Assignment", icon: CheckSquare },
     { id: "employee", label: "New Employee", icon: UserPlus },
+    { id: "excel", label: "Import Excel", icon: FileSpreadsheet },
   ];
+
+  const modeMeta = {
+    employee: { title: "Add New Employee Profile" },
+    review: { title: "Record Performance Review" },
+    attendance: { title: "Log Monthly Attendance" },
+    task: { title: "Assign New Operational Task" },
+    excel: { title: "Import Employee Data from Excel" },
+  };
+
+  const currentModeMeta = modeMeta[mode] || modeMeta.review;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/70 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-xl max-h-[92vh] flex flex-col rounded-3xl shadow-2xl border overflow-hidden animate-in zoom-in-95 duration-200 bg-white border-slate-200/90 dark:bg-slate-900 dark:border-slate-800">
+      <div className="relative w-full max-w-[1100px] max-h-[85vh] flex flex-col overflow-hidden rounded-[24px] border border-[#1d3557] bg-[#061827] shadow-[0_30px_90px_rgba(1,8,18,0.9)] animate-in zoom-in-95 duration-200">
         {/* Header */}
-        <div className="flex items-center justify-between border-b px-6 py-4.5 bg-slate-50/80 border-slate-100 dark:bg-slate-950/80 dark:border-slate-800">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-500 text-white font-bold text-sm shadow-md shadow-blue-500/25">
-              <PlusCircle className="w-5 h-5 text-white" />
+        <div className="flex items-center justify-between border-b border-[#12304d] bg-[#0a1d31] px-5 sm:px-7 py-4 sm:py-5">
+          <div className="flex items-center gap-3 sm:gap-4">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-transparent p-0 shadow-none">
+              <img
+                src="/image.png"
+                alt="HR Pulse logo"
+                className="h-12 w-12 object-contain drop-shadow-[0_8px_18px_rgba(14,165,233,0.55)]"
+              />
             </div>
             <div>
-              <h3 className="text-base font-extrabold tracking-tight text-slate-900 dark:text-white">
-                {mode === "employee" && "Add New Employee Profile"}
-                {mode === "review" && "Record Performance Review"}
-                {mode === "attendance" && "Log Monthly Attendance"}
-                {mode === "task" && "Assign New Operational Task"}
+              <h3 className="text-lg sm:text-2xl font-extrabold tracking-tight text-white">
+                {currentModeMeta.title}
               </h3>
-              <p className="text-xs font-medium flex items-center gap-1.5 mt-0.5 text-slate-500 dark:text-slate-400">
-                <Database className="w-3 h-3 text-emerald-400" />
+              <p className="mt-1 flex items-center gap-1.5 text-xs sm:text-sm font-medium text-slate-300">
+                <Database className="w-3.5 h-3.5 text-emerald-400" />
                 <span>Direct Persistent Save to MySQL Database</span>
               </p>
             </div>
@@ -191,14 +226,14 @@ export default function DataEntryModal({
 
           <button
             onClick={onClose}
-            className="flex h-8 w-8 items-center justify-center rounded-xl border transition-colors cursor-pointer border-slate-200 text-slate-400 hover:bg-slate-100 hover:text-slate-700 dark:border-slate-700 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white"
+            className="flex h-9 w-9 items-center justify-center rounded-xl border border-[#1d3557] bg-[#0d2340] text-slate-300 transition-colors cursor-pointer hover:bg-[#132d4d] hover:text-white"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Mode Selector Tabs */}
-        <div className="flex border-b px-4 sm:px-6 pt-3 gap-2 overflow-x-auto text-xs font-bold border-slate-100 bg-white dark:border-slate-800 dark:bg-slate-900">
+        <div className="flex gap-2 overflow-x-auto border-b border-[#12304d] bg-[#0b1e30] px-4 sm:px-6 pt-3 text-sm font-bold">
           {tabs.map((tab) => {
             const Icon = tab.icon;
             const isActive = mode === tab.id;
@@ -210,13 +245,13 @@ export default function DataEntryModal({
                   setError(null);
                   setSuccessMsg(null);
                 }}
-                className={`flex items-center gap-2 pb-2.5 px-3 border-b-2 transition-all whitespace-nowrap cursor-pointer ${
+                className={`flex items-center gap-2 whitespace-nowrap border-b-2 px-4 pb-3 pt-1 transition-all cursor-pointer ${
                   isActive
-                    ? "border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400"
-                    : "border-transparent text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200"
+                    ? "border-blue-500 bg-[#0d2642] text-blue-300"
+                    : "border-transparent text-slate-300 hover:text-white hover:bg-[#112844]"
                 }`}
               >
-                <Icon className={`w-3.5 h-3.5 ${isActive ? "text-blue-600 dark:text-blue-400" : "text-slate-400"}`} />
+                <Icon className={`w-4 h-4 ${isActive ? "text-blue-300" : "text-slate-400"}`} />
                 <span>{tab.label}</span>
               </button>
             );
@@ -630,6 +665,53 @@ export default function DataEntryModal({
                 </div>
               </>
             )}
+
+            {/* ================= MODE: EXCEL IMPORT ================= */}
+            {mode === "excel" && (
+              <div className="space-y-4">
+                <div className="rounded-2xl border border-dashed border-blue-300 bg-blue-50/80 p-4 dark:border-blue-800/80 dark:bg-blue-950/20">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600/10 text-blue-600 dark:text-blue-300">
+                      <Upload className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-slate-900 dark:text-white">Upload employee spreadsheet</h4>
+                      <p className="text-[11px] text-slate-600 dark:text-slate-400">
+                        Accepted formats: .xlsx, .xls, .csv
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold mb-2 text-slate-700 dark:text-slate-300">
+                    Choose Excel file *
+                  </label>
+                  <input
+                    type="file"
+                    accept=".xlsx,.xls,.csv"
+                    required
+                    onChange={(e) => {
+                      const file = e.target.files?.[0] || null;
+                      setExcelFile(file);
+                      setExcelFileName(file ? file.name : "");
+                      setError(null);
+                    }}
+                    className="block w-full text-xs text-slate-600 file:mr-4 file:rounded-xl file:border-0 file:bg-blue-600 file:px-4 file:py-2 file:text-xs file:font-bold file:text-white file:shadow-sm hover:file:bg-blue-700 dark:text-slate-300 dark:file:bg-blue-500 dark:hover:file:bg-blue-400"
+                  />
+                  {excelFileName && (
+                    <p className="mt-2 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
+                      Selected file: {excelFileName}
+                    </p>
+                  )}
+                </div>
+
+                <div className="rounded-xl border border-slate-200 bg-slate-50 p-3 text-[11px] leading-5 text-slate-600 dark:border-slate-800 dark:bg-slate-950/50 dark:text-slate-300">
+                  The sheet should contain employee fields like employee name, employee ID, gender, department, designation,
+                  grade, date of joining, and status. The system will map the imported rows directly into the database.
+                </div>
+              </div>
+            )}
           </form>
         </div>
 
@@ -651,12 +733,12 @@ export default function DataEntryModal({
             {loading ? (
               <>
                 <RefreshCw className="w-3.5 h-3.5 animate-spin" />
-                <span>Saving to MySQL...</span>
+                <span>{mode === "excel" ? "Uploading Excel..." : "Saving to MySQL..."}</span>
               </>
             ) : (
               <>
-                <Save className="w-3.5 h-3.5" />
-                <span>Save Record</span>
+                {mode === "excel" ? <Upload className="w-3.5 h-3.5" /> : <Save className="w-3.5 h-3.5" />}
+                <span>{mode === "excel" ? "Upload Excel" : "Save Record"}</span>
               </>
             )}
           </button>
